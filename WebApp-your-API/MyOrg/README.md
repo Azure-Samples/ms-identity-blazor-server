@@ -204,6 +204,7 @@ This behavior is expected as the browser is not authenticated. The Web applicati
 cd Client
 dotnet restore
 ```
+
 Then:  
 In a separate console window, execute the following commands
 

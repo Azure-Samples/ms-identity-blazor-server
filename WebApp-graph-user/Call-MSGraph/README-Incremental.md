@@ -30,14 +30,14 @@ description: "This sample demonstrates how to call Microsoft Graph on behalf-of 
 
 ## Overview
 
-In the second chapter, we extend our ASP .Net Core Blazor Server application to call a downstream API (Microsoft Graph) to obtain more information about the signed-in user.
+In the second chapter, we extend our ASP .Net Core Blazor Server application to call a downstream API ([Microsoft Graph](https://aka.ms/graph)) to obtain more information about the signed-in user.
 
 ## Scenario
 
-With respect to the previous chapter of the tutorial, this chapter adds the following steps:
+Continuing from  the previous chapter of the tutorial, this chapter adds the following steps:
 
-1. The client application acquires an Access Token for Microsoft Graph.
-1. The **Access Token** is used as a *bearer* token to authorize the user to call the [Microsoft Graph API](https://docs.microsoft.com/graph/overview)
+1. The client application acquires an [Access Tokens](https://aka.ms/access-tokens) for Microsoft Graph.
+1. The **Access Token** is used as a *bearer* token to authorize the user to call the [Microsoft Graph API](https://aka.ms/graph)
 1. **Microsoft Graph API** responds with the resource that the user has access to.
 
 ![Overview](./ReadmeFiles/topology.png)
@@ -74,7 +74,7 @@ cd ms-identity-blazor-server\WebApp-graph-user\Call-MSGraph
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
-1. Open `blazorserver-calls-MS-graph\appsettings.json` file and copy the details from `WebApp-OIDC\MyOrg\blazorserver-singleOrg\appsettings.json` file.
+1. Open `blazorserver-calls-MS-graph\appsettings.json` file and copy the details from the previous chapter's `WebApp-OIDC\MyOrg\blazorserver-singleOrg\appsettings.json` file.
 1. Find the app key `ClientSecret` and replace the existing value with the key you saved during the creation of the `WebApp-blazor-server` app, in the Azure portal.
 
 ## Running the sample
