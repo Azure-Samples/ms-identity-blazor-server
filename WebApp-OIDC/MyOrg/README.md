@@ -30,18 +30,18 @@ description: "This sample demonstrates a ASP .Net Core Blazor Server application
 
 ## Overview
 
-This sample demonstrates a ASP .Net Core Blazor Server application that authenticates users against Azure AD.
+This sample demonstrates a ASP .Net Core Blazor Server application that authenticates users against the Microsoft Identity Platform.
 
 ## Scenario
 
-1. The client ASP .Net Core Blazor Server application uses the Microsoft Authentication Library [MSAL.Net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) and [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) libraries to obtain an [ID Token](https://docs.microsoft.com/azure/active-directory/develop/id-tokens) from **Azure AD**.
+1. The client ASP .Net Core Blazor Server application uses the Microsoft Authentication Library [MSAL.NET](http://aka.ms/msal-net) and [Microsoft.Identity.Web](https://aka.ms/microsoft-identity-web) libraries to sign-in a user in their tenant and obtain an [ID Tokens](https://aka.ms/id-tokens) from **Azure AD**.
 2. The **ID Token** proves that the user has successfully authenticated against **Azure AD**.
 
 ![Overview](./ReadmeFiles/topology.png)
 
 ## Prerequisites
 
-- Either [Visual Studio](https://visualstudio.microsoft.com/downloads/) or [Visual Studio Code](https://code.visualstudio.com/download) and [.NET Core SDK](https://www.microsoft.com/net/learn/get-started)
+- Either [Visual Studio](https://visualstudio.microsoft.com/downloads/) or [Visual Studio Code](https://code.visualstudio.com/download) and the [.NET Core SDK](https://www.microsoft.com/net/learn/get-started)
 - An **Azure AD** tenant. For more information see: [How to get an Azure AD tenant](https://docs.microsoft.com/azure/active-directory/develop/quickstart-create-new-tenant)
 - A user account in your **Azure AD** tenant. This sample will not work with a **personal Microsoft account**. Therefore, if you signed in to the [Azure portal](https://portal.azure.com) with a personal account and have never created a user account in your directory before, you need to do that now.
 
@@ -197,7 +197,6 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 
 > - Describe where the code uses auth libraries, or calls the graph
 > - Describe specific aspects (e.g. caching, validation etc.)
-
 
 ## More information
 

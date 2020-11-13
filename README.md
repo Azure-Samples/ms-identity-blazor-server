@@ -6,14 +6,14 @@ products:
   - aspnet-core
   - azure-active-directory  
   - azure-web-apps
-name: Enable your Blazor Server to sign-in users and call APIs with the Microsoft identity platform
+name: Enable your Blazor Server app to sign-in users and call APIs with the Microsoft identity platform
 urlFragment: ms-identity-blazor-server
 description: "This sample demonstrates how to enable your Blazor Server to sign-in users and call APIs with the Microsoft identity platform"
 ---
 
-# Tutorial: Enable your Blazor Server to sign-in users and call APIs with the Microsoft identity platform
+# Tutorial: Enable your Blazor Server app to sign-in users and call APIs with the Microsoft identity platform
 
-The [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) and [Azure Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/overview) (Azure AD B2C) are central to the **Azure** cloud ecosystem. This tutorial aims to take you through the fundamentals of modern authentication with ASP.NET Core Blazor Server, using the [Microsoft Authentication Library](https://docs.microsoft.com/azure/active-directory/develop/msal-overview).
+The [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) and [Azure Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/overview) (Azure AD B2C) are central to the **Azure** cloud ecosystem. This tutorial aims to take you through the fundamentals of enabling modern authentication for an ASP.NET Core Blazor Server, using the [Microsoft Authentication Library](https://docs.microsoft.com/azure/active-directory/develop/msal-overview) and [Microsoft.Identity.Web](https://aka.ms/microsoft-identity-web).
 
 We recommend following the chapters in successive order. However, the code samples are self-contained, so feel free to pick samples by topics that you may need at the moment.
 
@@ -106,4 +106,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
