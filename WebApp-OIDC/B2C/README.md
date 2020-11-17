@@ -24,6 +24,8 @@ description: "This sample demonstrates how to enable your Blazor Server to sign-
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
 
+![.NET Core](https://github.com/Azure-Samples/ms-identity-blazor-server/workflows/.NET%20Core/badge.svg)
+
 ## Overview
 
 This sample demonstrates an ASP.NET Core Blazor Server standalone application that authenticates users against Azure AD B2C.

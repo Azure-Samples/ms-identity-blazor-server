@@ -23,10 +23,13 @@ description: "This sample demonstrates an ASP.NET Core Blazor Server application
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
+ 1. [Deployment](#deployment)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
  1. [Code of Conduct](#code-of-conduct)
+
+![.NET Core](https://github.com/Azure-Samples/ms-identity-blazor-server/workflows/.NET%20Core/badge.svg)
 
 ## Overview
 
@@ -248,6 +251,10 @@ This section, here, is only about the additional code added to let the Web App c
         }
     }
     ```
+
+## Deployment
+
+See [README.md](../../Deploy-to-Azure/README.md) to deploy this sample to Azure.
 
 ## More information
 

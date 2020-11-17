@@ -63,11 +63,11 @@ We recommend following the chapters in successive order. However, the code sampl
 |----------------|---------------|
 | <img src="./WebApp-graph-user/Call-MSGraph/ReadmeFiles/topology.png" width="200"> | [**Acquire an Access Token from Azure AD and call Microsoft Graph**](./WebApp-graph-user/Call-MSGraph) </br> Here we build on the concepts we built to authenticate users to further acquire an Access Token for Microsoft Graph and then call the Microsoft Graph API. |
 
-### Chapter 3: Sign-in a user and get an Access Token for Microsoft Graph
+### Chapter 3: Protect an API and call the API from your client app
 
 |                |               |
 |----------------|---------------|
-| <img src="./WebApp-graph-user/Call-MSGraph/ReadmeFiles/topology.png" width="200"> | [**Acquire an Access Token from Azure AD and call Microsoft Graph**](./WebApp-graph-user/Call-MSGraph) </br> Here we build on the concepts we built to authenticate users to further acquire an Access Token for Microsoft Graph and then call the Microsoft Graph API. |
+| <img src="./WebApp-your-API/MyOrg/ReadmeFiles/topology.png" width="200"> | [**Protect and call a web API on Azure AD**](./WebApp-your-API/MyOrg) </br> Protect your web API with the Azure AD. Use a client application to sign-in a user, acquire an Access Token for your web API and call your protected Web API. |
 
 ### Chapter 4: Deploy your solutions to Azure
 
