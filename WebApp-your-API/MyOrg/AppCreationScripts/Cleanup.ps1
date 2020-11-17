@@ -75,9 +75,9 @@ Function Cleanup
     # also remove service principals of this app
     Get-AzureADServicePrincipal -filter "DisplayName eq 'ToDoListService-aspnetcore'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
     
-    Write-Host "Removing 'webApp' (WebApp-blazor-server) if needed"
-    Get-AzureADApplication -Filter "DisplayName eq 'WebApp-blazor-server'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
-    $apps = Get-AzureADApplication -Filter "DisplayName eq 'WebApp-blazor-server'"
+    Write-Host "Removing 'webApp' (WebApp-calls-API-blazor-server) if needed"
+    Get-AzureADApplication -Filter "DisplayName eq 'WebApp-calls-API-blazor-server'"  | ForEach-Object {Remove-AzureADApplication -ObjectId $_.ObjectId }
+    $apps = Get-AzureADApplication -Filter "DisplayName eq 'WebApp-calls-API-blazor-server'"
     if ($apps)
     {
         Remove-AzureADApplication -ObjectId $apps.ObjectId
@@ -86,10 +86,10 @@ Function Cleanup
     foreach ($app in $apps) 
     {
         Remove-AzureADApplication -ObjectId $app.ObjectId
-        Write-Host "Removed WebApp-blazor-server.."
+        Write-Host "Removed WebApp-calls-API-blazor-server.."
     }
     # also remove service principals of this app
-    Get-AzureADServicePrincipal -filter "DisplayName eq 'WebApp-blazor-server'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
+    Get-AzureADServicePrincipal -filter "DisplayName eq 'WebApp-calls-API-blazor-server'" | ForEach-Object {Remove-AzureADServicePrincipal -ObjectId $_.Id -Confirm:$false}
     
 }
 

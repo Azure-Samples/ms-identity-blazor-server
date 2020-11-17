@@ -8,24 +8,27 @@ using ToDoListModel;
 
 namespace blazorserver_client.Pages.ToDoPages
 {
-    public enum MODE { None, Create, UpdateDelete };
 
     public class ToDoListBase : ComponentBase
     {
         [Inject]
         ToDoListService ToDoListService { get; set; }
+
         [Inject]
         MicrosoftIdentityConsentAndConditionalAccessHandler ConsentHandler { get; set; }
+
         [Inject]
         NavigationManager Navigation { get; set; }
 
         protected IEnumerable<ToDo> toDoList = new List<ToDo>();
-        protected MODE mode = MODE.None;
+        
         protected ToDo toDo = new ToDo();
+       
         protected override async Task OnInitializedAsync()
         {
             await GetToDoListService();
         }
+       
         [AuthorizeForScopes(ScopeKeySection = "TodoList:TodoListScope")]
         private async Task GetToDoListService()
         {
@@ -36,21 +39,16 @@ namespace blazorserver_client.Pages.ToDoPages
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+
+                // Process the exception from a user challenge
                 ConsentHandler.HandleException(ex);
             }
         }
+
         protected async Task DeleteItem(int Id)
         {
             await ToDoListService.DeleteAsync(Id);
             await GetToDoListService();
-        }
-        protected void Create()
-        {
-            mode = MODE.Create;
-        }
-        protected void Edit()
-        {
-            Navigation.NavigateTo("create");
         }
     }
 }

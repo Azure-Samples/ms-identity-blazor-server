@@ -2,7 +2,7 @@
   "Sample": {
     "Title": "Enable your Blazor Server to sign-in users and call Web API with the Microsoft identity platform",
     "Level": 200,
-    "Client": "ASP .Net Core Blazor Server",
+    "Client": "ASP.NET Core Blazor Server",
     "Service": "ASP.NET Core Web API",
     "RepositoryUrl": "ms-identity-blazor-server",
     "Endpoint": "AAD v2.0"
@@ -22,7 +22,7 @@
     },
     {
       "Id": "webApp",
-      "Name": "WebApp-blazor-server",
+      "Name": "WebApp-calls-API-blazor-server",
       "Kind": "WebApp",
       "Audience": "AzureADMyOrg",
       "HomePage": "https://localhost:44318/",

@@ -288,18 +288,18 @@ Function ConfigureApplications
 
 
    # Create the webApp AAD application
-   Write-Host "Creating the AAD application (WebApp-blazor-server)"
+   Write-Host "Creating the AAD application (WebApp-calls-API-blazor-server)"
    # Get a 2 years application key for the webApp Application
    $pw = ComputePassword
    $fromDate = [DateTime]::Now;
    $key = CreateAppKey -fromDate $fromDate -durationInYears 2 -pw $pw
    $webAppAppKey = $pw
    # create the application 
-   $webAppAadApplication = New-AzureADApplication -DisplayName "WebApp-blazor-server" `
+   $webAppAadApplication = New-AzureADApplication -DisplayName "WebApp-calls-API-blazor-server" `
                                                   -HomePage "https://localhost:44318/" `
                                                   -LogoutUrl "https://localhost:44318/signout-oidc" `
                                                   -ReplyUrls "https://localhost:44318/", "https://localhost:44318/signin-oidc" `
-                                                  -IdentifierUris "https://$tenantName/WebApp-blazor-server" `
+                                                  -IdentifierUris "https://$tenantName/WebApp-calls-API-blazor-server" `
                                                   -PasswordCredentials $key `
                                                   -PublicClient $False
 
@@ -316,12 +316,12 @@ Function ConfigureApplications
    }
 
 
-   Write-Host "Done creating the webApp application (WebApp-blazor-server)"
+   Write-Host "Done creating the webApp application (WebApp-calls-API-blazor-server)"
 
    # URL of the AAD application in the Azure portal
    # Future? $webAppPortalUrl = "https://portal.azure.com/#@"+$tenantName+"/blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/Overview/appId/"+$webAppAadApplication.AppId+"/objectId/"+$webAppAadApplication.ObjectId+"/isMSAApp/"
    $webAppPortalUrl = "https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/CallAnAPI/appId/"+$webAppAadApplication.AppId+"/objectId/"+$webAppAadApplication.ObjectId+"/isMSAApp/"
-   Add-Content -Value "<tr><td>webApp</td><td>$currentAppId</td><td><a href='$webAppPortalUrl'>WebApp-blazor-server</a></td></tr>" -Path createdApps.html
+   Add-Content -Value "<tr><td>webApp</td><td>$currentAppId</td><td><a href='$webAppPortalUrl'>WebApp-calls-API-blazor-server</a></td></tr>" -Path createdApps.html
 
    $requiredResourcesAccess = New-Object System.Collections.Generic.List[Microsoft.Open.AzureAD.Model.RequiredResourceAccess]
 

@@ -8,7 +8,7 @@ products:
   - azure-web-apps
 name: Enable your Blazor Server to sign-in users with the Microsoft identity platform
 urlFragment: ms-identity-blazor-server
-description: "This sample demonstrates a ASP .Net Core Blazor Server application that authenticates users against Azure AD"
+description: "This sample demonstrates an ASP.NET Core Blazor Server application that authenticates users with Azure AD"
 ---
 # Enable your Blazor Server to sign-in users with the Microsoft identity platform
 
@@ -21,6 +21,7 @@ description: "This sample demonstrates a ASP .Net Core Blazor Server application
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
+ 1. [Next chapter of the tutorial: the Web APP calls Microsoft Graph](#next-chapter-of-the-tutorial-the-web-app-calls-microsoft-graph)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
@@ -30,12 +31,12 @@ description: "This sample demonstrates a ASP .Net Core Blazor Server application
 
 ## Overview
 
-This sample demonstrates a ASP .Net Core Blazor Server application that authenticates users against the Microsoft Identity Platform.
+This sample demonstrates an ASP.NET Core Blazor Server application that authenticates users with the Microsoft Identity Platform.
 
 ## Scenario
 
-1. The client ASP .Net Core Blazor Server application uses the Microsoft Authentication Library [MSAL.NET](http://aka.ms/msal-net) and [Microsoft.Identity.Web](https://aka.ms/microsoft-identity-web) libraries to sign-in a user in their tenant and obtain an [ID Tokens](https://aka.ms/id-tokens) from **Azure AD**.
-2. The **ID Token** proves that the user has successfully authenticated against **Azure AD**.
+1. The client ASP.NET Core Blazor Server application uses the Microsoft Authentication Library [MSAL.NET](http://aka.ms/msal-net) and [Microsoft.Identity.Web](https://aka.ms/microsoft-identity-web) libraries to sign-in a user in their tenant and obtain an [ID Tokens](https://aka.ms/id-tokens) from **Azure AD**.
+1. The **ID Token** proves that the user has successfully authenticated against **Azure AD**.
 
 ![Overview](./ReadmeFiles/topology.png)
 
@@ -47,16 +48,13 @@ This sample demonstrates a ASP .Net Core Blazor Server application that authenti
 
 ## Setup
 
-### Clone or download this repository
+### In the downloaded folder
 
 From your shell or command line:
 
 ```console
-git clone https://github.com/Azure-Samples/ms-identity-blazor-server.git
 cd ms-identity-blazor-server\WebApp-OIDC\MyOrg
 ```
-
-or download and extract the repository .zip file.
 
 > :warning: To avoid path length limitations on Windows, we recommend cloning into a directory near the root of your drive.
 
@@ -116,6 +114,7 @@ As a first step you'll need to:
    - If you don't have a platform added, select **Add a platform** and select the **Web** option.
    - In the **Redirect URIs** section, enter the following redirect URIs.
       - `https://localhost:44318/signin-oidc`
+   - In the **Implicit grant** section, check the **ID tokens** option.
    - In the **Logout URL** section, set it to `https://localhost:44318/signout-oidc`.
 1. Select **Save** to save your changes.
 
@@ -167,7 +166,7 @@ dotnet run
 ## Explore the sample
 
 1. Open your browser and navigate to `https://localhost:44318`.
-1. Select the **Sign in** button on the top right corner. You will see claims from the signed-in user's token.
+1. Select the **Sign in** button on the top right corner. When the user signs-in for the first time , a consent screen is presented with required permissions, select **Accept**. You will see claims from the signed-in user's token.
 
 ![UserClaims](./ReadmeFiles/UserClaims.png)
 
@@ -195,8 +194,52 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 
 ## About the code
 
-> - Describe where the code uses auth libraries, or calls the graph
-> - Describe specific aspects (e.g. caching, validation etc.)
+1. In `Startup.cs`, add below lines of code in **ConfigureServices** method:
+
+    ```csharp
+    services.AddMicrosoftIdentityWebAppAuthentication(Configuration);
+    ```
+
+    This enables your application to use the Microsoft identity platform endpoint to sign-in users.
+
+1. **Index.razor** is the landing page when application starts. Index.razor contains child component called `UserClaims`. If user is authenticated successfully, `UserClaims` displays a few claims present in the ID Token issued by Azure AD.
+
+1. In the `UserClaimsBase.cs` class, **GetClaimsPrincipalData** method retrieves signed-in user's claims using the **GetAuthenticationStateAsync()** method of the **AuthenticationStateProvider** class.
+
+     ```csharp
+    public class UserClaimsBase : ComponentBase
+    {
+        [Inject]
+        private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        protected string _authMessage;
+        protected IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
+        private string[] returnClaims = { "name", "preferred_username", "tid", "oid" };
+        protected override async Task OnInitializedAsync()
+        {
+            await GetClaimsPrincipalData();
+        }
+        private async Task GetClaimsPrincipalData()
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity.IsAuthenticated)
+            {
+                _authMessage = $"{user.Identity.Name} is authenticated.";
+                _claims = user.Claims.Where(x => returnClaims.Contains(x.Type));
+            }
+            else
+            {
+                _authMessage = "The user is NOT authenticated.";
+            }
+        }
+    }
+    ```
+
+## Next chapter of the tutorial: the Web APP calls Microsoft Graph
+
+In the next chapter, we will enhance this Web APP to call downstream Web API (Microsoft Graph).
+
+See [Call-MSGraph](../../WebApp-graph-user/Call-MSGraph/README-Incremental.md)
 
 ## More information
 
@@ -204,12 +247,6 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 - [Overview of Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/msal-overview)
 - [Quickstart: Register an application with the Microsoft identity platform (Preview)](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app)
 - [Quickstart: Configure a client application to access web APIs (Preview)](https://docs.microsoft.com/azure/active-directory/develop/quickstart-configure-app-access-web-apis)
-- [Understanding Azure AD application consent experiences](https://docs.microsoft.com/azure/active-directory/develop/application-consent-experience)
-- [Understand user and admin consent](https://docs.microsoft.com/azure/active-directory/develop/howto-convert-app-to-be-multi-tenant#understand-user-and-admin-consent)
-- [Application and service principal objects in Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)
-- [National Clouds](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud#app-registration-endpoints)
-- [MSAL code samples](https://docs.microsoft.com/azure/active-directory/develop/sample-v2-code)
-    // Add MSAL.NET and/or Identity.Web Docs
 
 For more information about how OAuth 2.0 protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](https://docs.microsoft.com/azure/active-directory/develop/authentication-flows-app-scenarios).
 

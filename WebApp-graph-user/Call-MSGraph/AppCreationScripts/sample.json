@@ -2,7 +2,7 @@
   "Sample": {
     "Title": "Call Microsoft Graph on behalf-of the signed-in users in your Blazor Server Application",
     "Level": 200,
-    "Client": "ASP .Net Core Blazor Server",
+    "Client": "ASP.NET Core Blazor Server",
     "RepositoryUrl": "ms-identity-blazor-server",
     "Endpoint": "AAD v2.0"
   },
@@ -13,12 +13,13 @@
   "AADApps": [
     {
       "Id": "webApp",
-      "Name": "WebApp-blazor-server",
+      "Name": "WebApp-blazor-server-call-graph",
       "Kind": "WebApp",
       "Audience": "AzureADMyOrg",
       "HomePage": "https://localhost:44318/",
       "ReplyUrls": "https://localhost:44318/, https://localhost:44318/signin-oidc",
       "LogoutUrl": "https://localhost:44318/signout-oidc",
+      "PasswordCredentials": "Auto",
       "RequiredResourcesAccess": [
         {
           "Resource": "Microsoft Graph",
@@ -51,6 +52,10 @@
         {
           "key": "Domain",
           "value": "$tenantName"
+        },
+        {
+          "key": "ClientSecret",
+          "value": ".AppKey"
         }
       ]
     }

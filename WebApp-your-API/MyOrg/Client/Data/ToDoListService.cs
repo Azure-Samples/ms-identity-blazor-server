@@ -26,8 +26,6 @@ namespace blazorserver_client
         }
     }
 
-    /// <summary></summary>
-    /// <seealso cref="TodoListClient.Services.ITodoListService" />
     public class ToDoListService
     {
         private readonly IHttpContextAccessor _contextAccessor;

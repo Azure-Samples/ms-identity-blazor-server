@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web.UI;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace blazorserver_client
 {
@@ -24,13 +25,16 @@ namespace blazorserver_client
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
                 .EnableTokenAcquisitionToCallDownstreamApi(new string[] { Configuration["TodoList:TodoListScope"] })
                     .AddInMemoryTokenCaches(); ;
-            //services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-            //    .AddMicrosoftIdentityWebApp(Configuration);
+            
             services.AddHttpContextAccessor();
+
             services.AddToDoListService(Configuration);
+            
             services.AddControllersWithViews(options =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -40,6 +44,8 @@ namespace blazorserver_client
             }).AddMicrosoftIdentityUI();
 
             services.AddRazorPages();
+
+            // Register the Microsoft Identity consent and conditional access handler service.
             services.AddServerSideBlazor()
                 .AddMicrosoftIdentityConsentHandler();
         }

@@ -21,6 +21,7 @@ description: "This sample demonstrates how to call Microsoft Graph on behalf-of 
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
+ 1. [Next chapter of the tutorial: the Web APP calls Web API](#next-chapter-of-the-tutorial-the-web-app-calls-web-api)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
@@ -30,7 +31,7 @@ description: "This sample demonstrates how to call Microsoft Graph on behalf-of 
 
 ## Overview
 
-In the second chapter, we extend our ASP .Net Core Blazor Server application to call a downstream API ([Microsoft Graph](https://aka.ms/graph)) to obtain more information about the signed-in user.
+In the second chapter, we extend our ASP.NET Core Blazor Server application to call a downstream API ([Microsoft Graph](https://aka.ms/graph) to obtain more information about the signed-in user.
 
 ## Scenario
 
@@ -74,7 +75,7 @@ cd ms-identity-blazor-server\WebApp-graph-user\Call-MSGraph
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
-1. Open `blazorserver-calls-MS-graph\appsettings.json` file and copy the details from the previous chapter's `WebApp-OIDC\MyOrg\blazorserver-singleOrg\appsettings.json` file.
+1. Open `blazorserver-calls-MS-graph\appsettings.json` file and copy the keys from "AzureAd" section of previous chapter's `WebApp-OIDC\MyOrg\blazorserver-singleOrg\appsettings.json` file.
 1. Find the app key `ClientSecret` and replace the existing value with the key you saved during the creation of the `WebApp-blazor-server` app, in the Azure portal.
 
 ## Running the sample
@@ -130,12 +131,59 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 
 ## About the code
 
-> - Describe where the code uses auth libraries, or calls the graph
-> - Describe specific aspects (e.g. caching, validation etc.)
+For details about the code to enable your Blazor Server application to sign-in users, see [About the code](../../WebApp-OIDC/MyOrg/README.md#about-the-code) section, of the README.md file located at **WebApp-OIDC/MyOrg**.
 
-## Deployment
+This section, here, is only about the additional code added to let the Web App call the Microsoft Graph.
 
-See [README.md](../../Deploy-to-Azure/README.md) to deploy this sample to Azure.
+1. In `Startup.cs`, add below lines of code in **ConfigureServices** method:
+
+    ```csharp
+   services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+            .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
+            .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+            .AddMicrosoftGraph(Configuration.GetSection("DownstreamApi"))
+            .AddInMemoryTokenCaches();
+    ```
+
+    This enables your application to use the Microsoft identity platform endpoint to sign-in users and to call Microsoft Graph API.
+1. **UserProfile.razor** component displays user information retrieved by **GetUserProfile** method of **UserProfileBase.cs**.
+
+    `UserProfileBase.cs` calls Microsoft Graph `/me` endpoint to retrieve user information.
+
+    ```csharp
+    public class UserProfileBase : ComponentBase
+    {
+        [Inject]
+        GraphServiceClient GraphClient { get; set; }
+        [Inject]
+        MicrosoftIdentityConsentAndConditionalAccessHandler ConsentHandler { get; set; }
+
+        protected User _user = new User();
+        protected override async Task OnInitializedAsync()
+        {
+            await GetUserProfile();
+        }
+        private async Task GetUserProfile()
+        {
+            try
+            {
+                var request = GraphClient.Me.Request();
+                _user = await request.GetAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ConsentHandler.HandleException(ex);
+            }
+        }
+    }
+    ```
+
+## Next chapter of the tutorial: the Web APP calls Web API
+
+In the next chapter, we will enhance this Web APP to call downstream Web API (Microsoft Graph).
+
+See [Call-WebAPI](../../WebApp-your-API/MyOrg/README-Incremental.md)
 
 ## More information
 
@@ -143,12 +191,6 @@ See [README.md](../../Deploy-to-Azure/README.md) to deploy this sample to Azure.
 - [Overview of Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/msal-overview)
 - [Quickstart: Register an application with the Microsoft identity platform (Preview)](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app)
 - [Quickstart: Configure a client application to access web APIs (Preview)](https://docs.microsoft.com/azure/active-directory/develop/quickstart-configure-app-access-web-apis)
-- [Understanding Azure AD application consent experiences](https://docs.microsoft.com/azure/active-directory/develop/application-consent-experience)
-- [Understand user and admin consent](https://docs.microsoft.com/azure/active-directory/develop/howto-convert-app-to-be-multi-tenant#understand-user-and-admin-consent)
-- [Application and service principal objects in Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)
-- [National Clouds](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud#app-registration-endpoints)
-- [MSAL code samples](https://docs.microsoft.com/azure/active-directory/develop/sample-v2-code)
-    // Add MSAL.NET and/or Identity.Web Docs
 
 For more information about how OAuth 2.0 protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](https://docs.microsoft.com/azure/active-directory/develop/authentication-flows-app-scenarios).
 

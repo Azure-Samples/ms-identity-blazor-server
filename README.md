@@ -15,17 +15,11 @@ description: "This sample demonstrates how to enable your Blazor Server to sign-
 
 The [Microsoft identity platform](https://docs.microsoft.com/azure/active-directory/develop/v2-overview), along with [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis) (Azure AD) and [Azure Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/overview) (Azure AD B2C) are central to the **Azure** cloud ecosystem. This tutorial aims to take you through the fundamentals of enabling modern authentication for an ASP.NET Core Blazor Server, using the [Microsoft Authentication Library](https://docs.microsoft.com/azure/active-directory/develop/msal-overview) and [Microsoft.Identity.Web](https://aka.ms/microsoft-identity-web).
 
-We recommend following the chapters in successive order. However, the code samples are self-contained, so feel free to pick samples by topics that you may need at the moment.
-
 > :warning: This is a *work in progress*. Come back frequently to discover more samples.
 
 ## Prerequisites
 
 - Either [Visual Studio](https://visualstudio.microsoft.com/downloads/) or [Visual Studio Code](https://code.visualstudio.com/download)
-- An **Azure AD** tenant. For more information see: [How to get an Azure AD tenant](https://docs.microsoft.com/azure/active-directory/develop/quickstart-create-new-tenant)
-- A user account in your **Azure AD** tenant.
-- An **Azure AD B2C** tenant. For more information see: [How to get an Azure AD B2C tenant](https://docs.microsoft.com/azure/active-directory-b2c/tutorial-create-tenant)
-- A user account in your **Azure AD B2C** tenant.
 
 Please refer to each sample's README for sample-specific prerequisites.
 
@@ -35,9 +29,26 @@ Please refer to each sample's README for sample-specific prerequisites.
 - [Fiddler](https://www.telerik.com/fiddler) for monitoring your network activity and troubleshooting.
 - Follow the [Azure AD Blog](https://techcommunity.microsoft.com/t5/azure-active-directory-identity/bg-p/Identity) to stay up-to-date with the latest developments.
 
+## Setup
+
+### Clone or download this repository
+
+From your shell or command line:
+
+```console
+git clone https://github.com/Azure-Samples/ms-identity-blazor-server.git
+```
+
+or download and extract the repository .zip file.
+
 Please refer to each sample's README for sample-specific recommendations.
 
 ## Contents
+
+- For **Azure AD**, start the tutorial from [here](./WebApp-OIDC/MyOrg/README.md)
+- For **Azure AD B2C**, start the tutorial from [here](./WebApp-OIDC/B2C/README.md)
+
+We recommend following the chapters in successive order. However, the code samples are self-contained, so feel free to pick samples by topics that you may need at the moment.
 
 ### Chapter 1: Adding Authentication with Azure AD in your web application
 
@@ -52,7 +63,7 @@ Please refer to each sample's README for sample-specific recommendations.
 |----------------|---------------|
 | <img src="./WebApp-graph-user/Call-MSGraph/ReadmeFiles/topology.png" width="200"> | [**Acquire an Access Token from Azure AD and call Microsoft Graph**](./WebApp-graph-user/Call-MSGraph) </br> Here we build on the concepts we built to authenticate users to further acquire an Access Token for Microsoft Graph and then call the Microsoft Graph API. |
 
-### Chapter 2: Sign-in a user and get an Access Token for Microsoft Graph
+### Chapter 3: Sign-in a user and get an Access Token for Microsoft Graph
 
 |                |               |
 |----------------|---------------|

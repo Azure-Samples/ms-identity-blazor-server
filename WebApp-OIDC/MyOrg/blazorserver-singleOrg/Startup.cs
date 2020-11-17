@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web.UI;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace blazorserver_singleOrg
 {
@@ -24,6 +25,8 @@ namespace blazorserver_singleOrg
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration);
             
             services.AddHttpContextAccessor();

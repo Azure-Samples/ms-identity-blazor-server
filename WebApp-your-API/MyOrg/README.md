@@ -10,7 +10,7 @@ products:
   - azure-active-directory  
 name: Enable your Blazor Server to sign-in users and call Web API with the Microsoft identity platform
 urlFragment: ms-identity-blazor-server
-description: "This sample demonstrates a ASP .Net Core Blazor Server application calling a ASP.NET Core Web API that is secured using Azure AD"
+description: "This sample demonstrates an ASP.NET Core Blazor Server application calling an ASP.NET Core Web API that is secured using Azure AD"
 ---
 # Enable your Blazor Server to sign-in users and call Web API with the Microsoft identity platform
 
@@ -30,11 +30,11 @@ description: "This sample demonstrates a ASP .Net Core Blazor Server application
 
 ## Overview
 
-This sample demonstrates a ASP .Net Core Blazor Server application calling a ASP.NET Core Web API that is secured using Azure AD.
+This sample demonstrates an ASP.NET Core Blazor Server application calling an ASP.NET Core Web API that is secured using Azure AD.
 
 ## Scenario
 
-1. The client ASP .Net Core Blazor Server application uses the Microsoft Authentication Library (MSAL) to sign-in and obtain a JWT access token from **Azure AD**.
+1. The client ASP.NET Core Blazor Server application uses the Microsoft Authentication Library [MSAL.Net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) and [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) libraries to sign-in and obtain a JWT [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) from **Azure AD**.
 2. The access token is used as a bearer token to authorize the user to call the ASP.NET Core Web API protected  **Azure AD**.
 
 ![Overview](./ReadmeFiles/topology.png)
@@ -47,15 +47,13 @@ This sample demonstrates a ASP .Net Core Blazor Server application calling a ASP
 
 ## Setup
 
-### Step 1: Clone or download this repository
+### In the downloaded folder
 
 From your shell or command line:
 
 ```console
-    git clone https://github.com/Azure-Samples/ms-identity-blazor-server.git
+cd ms-identity-blazor-server\WebApp-your-API\MyOrg
 ```
-
-or download and extract the repository .zip file.
 
 > :warning: To avoid path length limitations on Windows, we recommend cloning into a directory near the root of your drive.
 
@@ -137,12 +135,12 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `TenantId` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of the `ToDoListService-aspnetcore` application copied from the Azure portal.
 
-### Register the web app (WebApp-blazor-server)
+### Register the web app (WebApp-calls-API-blazor-server)
 
 1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `WebApp-blazor-server`.
+   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `WebApp-calls-API-blazor-server`.
    - Under **Supported account types**, select **Accounts in this organizational directory only**.
    - In the **Redirect URI (optional)** section, select **Web** in the combo-box and enter the following redirect URI: `https://localhost:44318/`.
      > Note that there are more than one redirect URIs used in this sample. You'll need to add them from the **Authentication** tab later after the app has been created successfully.
@@ -152,6 +150,8 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - If you don't have a platform added, select **Add a platform** and select the **Web** option.
    - In the **Redirect URIs** section, enter the following redirect URIs.
       - `https://localhost:44318/signin-oidc`
+   - In the **Implicit grant** section, check the **ID tokens** option as this sample requires
+     the hybrid flow (code id_token) to be enabled to sign-in the user.
    - In the **Logout URL** section, set it to `https://localhost:44318/signout-oidc`.
 1. Select **Save** to save your changes.
 1. In the app's registration screen, select the **Certificates & secrets** blade in the left to open the page where we can generate secrets and upload certificates.
@@ -167,17 +167,17 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - In the **Delegated permissions** section, select the **Access 'ToDoListService-aspnetcore'** in the list. Use the search box if necessary.
    - Select the **Add permissions** button at the bottom.
 
-#### Configure the webApp app (WebApp-blazor-server) to use your app registration
+#### Configure the webApp app (WebApp-calls-API-blazor-server) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `Client\appsettings.json` file.
-1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of the `WebApp-blazor-server` application copied from the Azure portal.
+1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of the `WebApp-calls-API-blazor-server` application copied from the Azure portal.
 1. Find the key `TenantId` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `Domain` and replace the existing value with your Azure AD tenant name.
-1. Find the key `ClientSecret` and replace the existing value with the key you saved during the creation of the `WebApp-blazor-server` app, in the Azure portal.
+1. Find the key `ClientSecret` and replace the existing value with the key you saved during the creation of the `WebApp-calls-API-blazor-server` app, in the Azure portal.
 1. Find the key `TodoListScope` and replace the existing value with Scope.
 1. Find the key `TodoListBaseAddress` and replace the existing value with the base address of the ToDoListService-aspnetcore project (by default `https://localhost:44351`).
 
@@ -235,10 +235,12 @@ Open your browser and navigate to `https://localhost:44318`.
 ## Explore the sample
 
 1. Open your browser and navigate to `https://localhost:44318`.
-1. Select the **Sign in** button on the top right corner. You will see claims from the signed-in user's token.
+1. Select the **Sign in** button on the top right corner. When the user signs-in for the first time , a consent screen is presented. This consent screen lets the user consent for the application to access the web API.
+
+    You will see claims from the signed-in user's token.
 
    ![UserClaims](./ReadmeFiles/UserClaims.png)
-1. Select ToDoList from vaigation bar and you can create, edit or delete the to list items.
+1. Select ToDoList from navigation bar and you can create, edit or delete the todo list items.
 
    ![ToDoList](./ReadmeFiles/ToDoList.png)
 
@@ -250,8 +252,94 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 
 ## About the code
 
-> - Describe where the code uses auth libraries, or calls the graph
-> - Describe specific aspects (e.g. caching, validation etc.)
+1. In `Startup.cs`, add below lines of code in **ConfigureServices** method:
+
+    ```csharp
+   services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
+           .EnableTokenAcquisitionToCallDownstreamApi(new string[] { Configuration["TodoList:TodoListScope"] })
+           .AddInMemoryTokenCaches(); ;
+    ```
+
+    This enables your application to use the Microsoft identity platform endpoint to sign-in users and to call the protected Web API.
+
+    The following code registers client service to use the HttpClient by dependency injection.
+
+    ```csharp
+   services.AddToDoListService(Configuration);
+    ```
+
+1. **Index.razor** is the landing page when application starts. Index.razor contains child component called `UserClaims`. If user is authenticated successfully, `UserClaims` displays a few claims present in the ID Token issued by Azure AD.
+
+1. In the `UserClaimsBase.cs` class, **GetClaimsPrincipalData** method retrieves signed-in user's claims using the **GetAuthenticationStateAsync()** method of the **AuthenticationStateProvider** class.
+
+     ```csharp
+    public class UserClaimsBase : ComponentBase
+    {
+        [Inject]
+        private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        protected string _authMessage;
+        protected IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
+        private string[] returnClaims = { "name", "preferred_username", "tid", "oid" };
+        protected override async Task OnInitializedAsync()
+        {
+            await GetClaimsPrincipalData();
+        }
+        private async Task GetClaimsPrincipalData()
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity.IsAuthenticated)
+            {
+                _authMessage = $"{user.Identity.Name} is authenticated.";
+                _claims = user.Claims.Where(x => returnClaims.Contains(x.Type));
+            }
+            else
+            {
+                _authMessage = "The user is NOT authenticated.";
+            }
+        }
+    }
+    ```
+
+1. **ToDoList.razor** component displays list of items created by signed-in user. List can be updated and deleted.
+
+    `ToDoListBase.cs` calls **GetToDoListService** method to retrieve the todo list.
+
+    ```csharp
+    public class ToDoListBase : ComponentBase
+    {
+        [Inject]
+        ToDoListService ToDoListService { get; set; }
+        [Inject]
+        MicrosoftIdentityConsentAndConditionalAccessHandler ConsentHandler { get; set; }
+        [Inject]
+        NavigationManager Navigation { get; set; }
+        protected IEnumerable<ToDo> toDoList = new List<ToDo>();
+        protected ToDo toDo = new ToDo();
+        protected override async Task OnInitializedAsync()
+        {
+            await GetToDoListService();
+        }
+        [AuthorizeForScopes(ScopeKeySection = "TodoList:TodoListScope")]
+        private async Task GetToDoListService()
+        {
+            try
+            {
+                toDoList = await ToDoListService.GetAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                ConsentHandler.HandleException(ex);
+            }
+        }
+        protected async Task DeleteItem(int Id)
+        {
+            await ToDoListService.DeleteAsync(Id);
+            await GetToDoListService();
+        }
+    }
+    ```
 
 ## More information
 
@@ -259,10 +347,6 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 - [Overview of Microsoft Authentication Library (MSAL)](https://docs.microsoft.com/azure/active-directory/develop/msal-overview)
 - [Quickstart: Register an application with the Microsoft identity platform (Preview)](https://docs.microsoft.com/azure/active-directory/develop/quickstart-register-app)
 - [Quickstart: Configure a client application to access web APIs (Preview)](https://docs.microsoft.com/azure/active-directory/develop/quickstart-configure-app-access-web-apis)
-- [Understanding Azure AD application consent experiences](https://docs.microsoft.com/azure/active-directory/develop/application-consent-experience)
-- [Understand user and admin consent](https://docs.microsoft.com/azure/active-directory/develop/howto-convert-app-to-be-multi-tenant#understand-user-and-admin-consent)
-- [Application and service principal objects in Azure Active Directory](https://docs.microsoft.com/azure/active-directory/develop/app-objects-and-service-principals)
-- [National Clouds](https://docs.microsoft.com/azure/active-directory/develop/authentication-national-cloud#app-registration-endpoints)
 
 For more information about how OAuth 2.0 protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](https://docs.microsoft.com/azure/active-directory/develop/authentication-flows-app-scenarios).
 

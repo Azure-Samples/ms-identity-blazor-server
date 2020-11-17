@@ -2,7 +2,7 @@
   "Sample": {
     "Title": "Enable your Blazor Server app to sign-in users with the Microsoft identity platform",
     "Level": 200,
-    "Client": "ASP .Net Core Blazor Server",
+    "Client": "ASP.NET Core Blazor Server",
     "RepositoryUrl": "ms-identity-blazor-server",
     "Endpoint": "AAD v2.0"
   },
