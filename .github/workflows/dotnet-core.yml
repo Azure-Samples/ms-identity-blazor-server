@@ -17,7 +17,19 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: dotnet restore **/*.sln
+    - name: Install dependencies (WebApp-graph-user)
+      run: dotnet restore WebApp-graph-user/Call-MSGraph/blazorserver-calls-MS-graph.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore **/*.sln
+      run: dotnet build --configuration Release --no-restore WebApp-graph-user/Call-MSGraph/blazorserver-calls-MS-graph.sln
+    - name: Install dependencies (WebApp-OIDC\MyOrg)
+      run: dotnet restore WebApp-OIDC/MyOrg/blazorserver-singleOrg.sln
+    - name: Build
+      run: dotnet build --configuration Release --no-restore WebApp-OIDC/MyOrg/blazorserver-singleOrg.sln
+    - name: Install dependencies (WebApp-OIDC/B2C)
+      run: dotnet restore WebApp-OIDC/B2C/blazorserver-B2C.sln
+    - name: Build
+      run: dotnet build --configuration Release --no-restore WebApp-OIDC/B2C/blazorserver-B2C.sln
+    - name: Install dependencies (WebApp-your-API/MyOrg)
+      run: dotnet restore WebApp-your-API/MyOrg/blazorserver-Calls-WebAPI.sln
+    - name: Build
+      run: dotnet build --configuration Release --no-restore WebApp-your-API/MyOrg/blazorserver-Calls-WebAPI.sln
