@@ -21,7 +21,7 @@ namespace blazorserver_calls_MS_graph.Pages
         protected IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
 
         // Defines list of claim types that will be displayed after successfull sign-in.
-        private string[] returnClaims = { "name", "preferred_username", "tid", "oid" };
+        private string[] printClaims = { "name", "preferred_username", "tid", "oid" };
 
         protected override async Task OnInitializedAsync()
         {
@@ -45,8 +45,8 @@ namespace blazorserver_calls_MS_graph.Pages
                 _authMessage = $"{user.Identity.Name} is authenticated.";
 
                 // Sets the claims value in _claims variable.
-                // The claims mentioned in returnClaims variable are selected only.
-                _claims = user.Claims.Where(x => returnClaims.Contains(x.Type));
+                // The claims mentioned in printClaims variable are selected only.
+                _claims = user.Claims.Where(x => printClaims.Contains(x.Type));
             }
             else
             {

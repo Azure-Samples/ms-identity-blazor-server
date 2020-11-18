@@ -195,7 +195,7 @@ Create the Web App using Blazor Server template:
         private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         protected string _authMessage;
         protected IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
-        private string[] returnClaims = { "name", "idp", "oid", "jobTitle", "emails" };
+        private string[] printClaims = { "name", "idp", "oid", "jobTitle", "emails" };
         protected override async Task OnInitializedAsync()
         {
             await GetClaimsPrincipalData();
@@ -207,7 +207,7 @@ Create the Web App using Blazor Server template:
             if (user.Identity.IsAuthenticated)
             {
                 _authMessage = $"{user.Identity.Name} is authenticated.";
-                _claims = user.Claims.Where(x => returnClaims.Contains(x.Type));
+                _claims = user.Claims.Where(x => printClaims.Contains(x.Type));
             }
             else
             {

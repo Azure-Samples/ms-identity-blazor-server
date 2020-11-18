@@ -213,7 +213,7 @@ Were we successful in addressing your learning objective? [Do consider taking a 
         private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         protected string _authMessage;
         protected IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
-        private string[] returnClaims = { "name", "preferred_username", "tid", "oid" };
+        private string[] printClaims = { "name", "preferred_username", "tid", "oid" };
         protected override async Task OnInitializedAsync()
         {
             await GetClaimsPrincipalData();
@@ -225,7 +225,7 @@ Were we successful in addressing your learning objective? [Do consider taking a 
             if (user.Identity.IsAuthenticated)
             {
                 _authMessage = $"{user.Identity.Name} is authenticated.";
-                _claims = user.Claims.Where(x => returnClaims.Contains(x.Type));
+                _claims = user.Claims.Where(x => printClaims.Contains(x.Type));
             }
             else
             {
