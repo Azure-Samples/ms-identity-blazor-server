@@ -235,9 +235,9 @@ Were we successful in addressing your learning objective? [Do consider taking a 
     }
     ```
 
-## Next chapter of the tutorial: the Web APP calls Microsoft Graph
+## Next chapter of the tutorial: the Web app calls Microsoft Graph
 
-In the next chapter, we will enhance this Web APP to call downstream Web API (Microsoft Graph).
+In the next chapter, we will enhance this Web app to call downstream Web API (Microsoft Graph).
 
 See [Call-MSGraph](../../WebApp-graph-user/Call-MSGraph/README-Incremental.md)
 
