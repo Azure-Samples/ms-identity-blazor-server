@@ -32,7 +32,7 @@ description: "This sample demonstrates how to call Microsoft Graph on behalf-of 
 
 ## Overview
 
-In the second chapter, we extend our ASP.NET Core Blazor Server application to call a downstream API ([Microsoft Graph](https://aka.ms/graph) to obtain more information about the signed-in user.
+In the second chapter, we extend our ASP.NET Core Blazor Server application to call a downstream API [Microsoft Graph](https://aka.ms/graph) to obtain more information about the signed-in user.
 
 ## Scenario
 
