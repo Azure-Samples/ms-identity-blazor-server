@@ -21,7 +21,7 @@ description: "This sample demonstrates an ASP.NET Core Blazor Server application
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
- 1. [Next chapter of the tutorial: the Web APP calls Microsoft Graph](#next-chapter-of-the-tutorial-the-web-app-calls-microsoft-graph)
+ 1. [Next chapter of the tutorial: the Web app calls Microsoft Graph](#next-chapter-of-the-tutorial-the-web-app-calls-microsoft-graph)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
@@ -166,7 +166,9 @@ dotnet run
 ## Explore the sample
 
 1. Open your browser and navigate to `https://localhost:44318`.
-1. Select the **Sign in** button on the top right corner. When the user signs-in for the first time , a consent screen is presented with required permissions, select **Accept**. You will see claims from the signed-in user's token.
+1. Select the **Sign in** button on the top right corner. When the user signs-in for the first time , a consent screen is presented with required permissions, select **Accept**. 
+
+    You will see claims from the signed-in user's token.
 
 ![UserClaims](./ReadmeFiles/UserClaims.png)
 
@@ -235,9 +237,9 @@ Were we successful in addressing your learning objective? [Do consider taking a 
     }
     ```
 
-## Next chapter of the tutorial: the Web APP calls Microsoft Graph
+## Next chapter of the tutorial: the Web app calls Microsoft Graph
 
-In the next chapter, we will enhance this Web APP to call downstream Web API (Microsoft Graph).
+In the next chapter, we will enhance this Web app to call downstream Web API (Microsoft Graph).
 
 See [Call-MSGraph](../../WebApp-graph-user/Call-MSGraph/README-Incremental.md)
 

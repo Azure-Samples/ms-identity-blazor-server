@@ -19,7 +19,6 @@ description: "This sample demonstrates how to enable your Blazor Server to sign-
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
- 1. [Next chapter of the tutorial: the Web APP calls Microsoft Graph](#next-chapter-of-the-tutorial-the-web-app-calls-microsoft-graph)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)

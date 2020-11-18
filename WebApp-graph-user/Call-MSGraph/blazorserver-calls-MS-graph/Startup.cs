@@ -24,9 +24,16 @@ namespace blazorserver_calls_MS_graph
         public void ConfigureServices(IServiceCollection services)
         {
             var initialScopes = Configuration.GetValue<string>("DownstreamApi:Scopes")?.Split(' ');
-            
+
+            // This is required to be instantiated before the OpenIdConnectOptions starts getting configured.
+            // By default, the claims mapping will map claim names in the old format to accommodate older SAML applications.
+            // 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' instead of 'roles'
+            // This flag ensures that the ClaimsIdentity claims collection will be built from the claims in the token.
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
+            // Add authentication with Microsoft identity platform.
+            // EnableTokenAcquisitionToCallDownstreamApi adds support for the web app to acquire tokens to call the API.
+            // AddMicrosoftGraph adds support to call Microsoft Graph
             services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
                     .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
@@ -43,6 +50,8 @@ namespace blazorserver_calls_MS_graph
             });
 
             services.AddRazorPages();
+
+            // Add the incremental consent and conditional access handler for Blazor server side pages.
             services.AddServerSideBlazor()
                 .AddMicrosoftIdentityConsentHandler();
         }

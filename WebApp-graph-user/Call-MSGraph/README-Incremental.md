@@ -21,7 +21,7 @@ description: "This sample demonstrates how to call Microsoft Graph on behalf-of 
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
  1. [About the code](#about-the-code)
- 1. [Next chapter of the tutorial: the Web APP calls Web API](#next-chapter-of-the-tutorial-the-web-app-calls-web-api)
+ 1. [Next chapter of the tutorial: the Web app calls Web API](#next-chapter-of-the-tutorial-the-web-app-calls-web-api)
  1. [Deployment](#deployment)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
@@ -36,7 +36,7 @@ In the second chapter, we extend our ASP.NET Core Blazor Server application to c
 
 ## Scenario
 
-Continuing from  the previous chapter of the tutorial, this chapter adds the following steps:
+Continuing from  the [previous chapter](../../WebApp-OIDC/MyOrg/README.md) of the tutorial, this chapter adds the following steps:
 
 1. The client application acquires an [Access Tokens](https://aka.ms/access-tokens) for Microsoft Graph.
 1. The **Access Token** is used as a *bearer* token to authorize the user to call the [Microsoft Graph API](https://aka.ms/graph)
@@ -180,15 +180,13 @@ This section, here, is only about the additional code added to let the Web App c
     }
     ```
 
-## Next chapter of the tutorial: the Web APP calls Web API
+## Next chapter of the tutorial: the Web app calls Web API
 
-In the next chapter, we will enhance this Web APP to call downstream Web API (Microsoft Graph).
-
-See [Call-WebAPI](../../WebApp-your-API/MyOrg/README-Incremental.md)
+Navigate to the chapter [Secure and call a Web API with the Microsoft identity platform](../../WebApp-your-API/MyOrg/README-Incremental.md) to learn about securing and calling Web APIs.
 
 ## Deployment
 
-See [README.md](../../Deploy-to-Azure/README.md) to deploy this sample to Azure.
+Refer to the [Azure deployment guide](../../Deploy-to-Azure/README.md) to deploy this sample code to an Azure App Service.
 
 ## More information
 

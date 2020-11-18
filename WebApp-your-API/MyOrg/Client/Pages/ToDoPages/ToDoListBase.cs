@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Web;
 using System;
 using System.Collections.Generic;
@@ -29,6 +28,10 @@ namespace blazorserver_client.Pages.ToDoPages
             await GetToDoListService();
         }
        
+        /// <summary>
+        /// Gets all todo list items.
+        /// </summary>
+        /// <returns></returns>
         [AuthorizeForScopes(ScopeKeySection = "TodoList:TodoListScope")]
         private async Task GetToDoListService()
         {
@@ -45,6 +48,11 @@ namespace blazorserver_client.Pages.ToDoPages
             }
         }
 
+        /// <summary>
+        /// Deletes the selected item then retrieves the todo list.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         protected async Task DeleteItem(int Id)
         {
             await ToDoListService.DeleteAsync(Id);

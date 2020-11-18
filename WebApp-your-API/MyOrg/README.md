@@ -37,7 +37,7 @@ This sample demonstrates an ASP.NET Core Blazor Server application calling an AS
 
 ## Scenario
 
-1. The client ASP.NET Core Blazor Server application uses the Microsoft Authentication Library [MSAL.Net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) and [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) libraries to sign-in and obtain a JWT [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) from **Azure AD**.
+1. The client ASP.NET Core Blazor Server application uses the Microsoft Authentication Library [MSAL.Net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) and [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) libraries to sign-in and obtain a JWT [Access Token](https://aka.ms/access-tokens) from **Azure AD**.
 2. The access token is used as a bearer token to authorize the user to call the ASP.NET Core Web API protected  **Azure AD**.
 
 ![Overview](./ReadmeFiles/topology.png)
@@ -112,7 +112,7 @@ As a first step you'll need to:
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
 1. Select **Save** to save your changes.
-1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can declare the parameters to expose this app as an Api for which client applications can obtain [access tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) for.
+1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can declare the parameters to expose this app as an Api for which client applications can obtain [access tokens](https://aka.ms/access-tokens) for.
 The first thing that we need to do is to declare the unique [resource](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow) URI that the clients will be using to obtain access tokens for this Api. To declare an resource URI, follow the following steps:
    - Select `Set` next to the **Application ID URI** to generate a URI that is unique for this app.
    - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
@@ -170,7 +170,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - In the **Delegated permissions** section, select the **Access 'ToDoListService-aspnetcore'** in the list. Use the search box if necessary.
    - Select the **Add permissions** button at the bottom.
 
-#### Configure the webApp app (WebApp-calls-API-blazor-server) to use your app registration
+#### Configure the web app (WebApp-calls-API-blazor-server) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
@@ -344,9 +344,22 @@ Were we successful in addressing your learning objective? [Do consider taking a 
     }
     ```
 
+1. `ToDoListService.cs` class in client project defines method to call protected API.
+    **PrepareAuthenticatedClient** method retrieves the Access Token for the web API and sets authorization and accept headers for the request.
+
+    ```csharp
+    private async Task PrepareAuthenticatedClient()
+    {
+        var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { _TodoListScope });
+        Debug.WriteLine($"access token-{accessToken}");
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    }
+    ```
+
 ## Deployment
 
-See [README.md](../../Deploy-to-Azure/README.md) to deploy this sample to Azure.
+Refer to the [Azure deployment guide](../../Deploy-to-Azure/README.md) to deploy this sample code to an Azure App Service.
 
 ## More information
 

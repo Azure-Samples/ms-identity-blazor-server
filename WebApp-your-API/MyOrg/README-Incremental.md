@@ -37,10 +37,11 @@ In the third chapter, we extend our ASP.NET Core Blazor Server application to ca
 
 ## Scenario
 
-Continuing from  the previous chapter of the tutorial, this chapter adds the following steps:
+Continuing from  the [previous chapter](../../WebApp-graph-user/Call-MSGraph/README-Incremental.md) of the tutorial, this chapter adds the following steps:
 
-1. The client application acquires an [Access Token](https://aka.ms/access-tokens) for Web API.
-1. The **Access Token** is used as a *bearer* token to authorize the user to call the ASP.NET Core Web API protected by **Azure AD**.
+1. Secure a ASP.NET Core Web API with the Microsoft identity platform.
+1. The client application acquires an [Access Token](https://aka.ms/access-tokens) for the Web API.
+1. The **Access Token** is used as a *bearer* token to authorize the user to call the Web API.
 
 ![Overview](./ReadmeFiles/topology.png)
 
@@ -64,7 +65,7 @@ cd ms-identity-blazor-server\WebApp-your-API\MyOrg
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
 1. Select **Save** to save your changes.
-1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can declare the parameters to expose this app as an Api for which client applications can obtain [access tokens](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) for.
+1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can declare the parameters to expose this app as an Api for which client applications can obtain [access tokens](https://aka.ms/access-tokens) for.
 The first thing that we need to do is to declare the unique [resource](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow) URI that the clients will be using to obtain access tokens for this Api. To declare an resource URI, follow the following steps:
    - Select `Set` next to the **Application ID URI** to generate a URI that is unique for this app.
    - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
@@ -110,7 +111,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - In the **Delegated permissions** section, select the **Access 'ToDoListService-aspnetcore'** in the list. Use the search box if necessary.
    - Select the **Add permissions** button at the bottom.
 
-#### Configure the webApp app (WebApp-blazor-server) to use your app registration
+#### Configure the web app (WebApp-blazor-server) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
@@ -194,7 +195,7 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 
 For details about the code to enable your Blazor Server application to sign-in users, see [About the code](../../WebApp-OIDC/MyOrg/README.md#about-the-code) section, of the README.md file located at **WebApp-OIDC/MyOrg**.
 
-This section, here, is only about the additional code added to let the Web App call the protected Web API.
+This section, here, is only about the additional code added to let the Web app call the protected Web API.
 
 1. In Startup.cs, add below lines of code in `ConfigureServices` method:
 
@@ -252,9 +253,22 @@ This section, here, is only about the additional code added to let the Web App c
     }
     ```
 
+1. `ToDoListService.cs` class in client project defines method to call protected API.
+    **PrepareAuthenticatedClient** method retrieves the Access Token for the web API and sets authorization and accept headers for the request.
+
+    ```csharp
+    private async Task PrepareAuthenticatedClient()
+    {
+        var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { _TodoListScope });
+        Debug.WriteLine($"access token-{accessToken}");
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    }
+    ```
+
 ## Deployment
 
-See [README.md](../../Deploy-to-Azure/README.md) to deploy this sample to Azure.
+Refer to the [Azure deployment guide](../../Deploy-to-Azure/README.md) to deploy this sample code to an Azure App Service.
 
 ## More information
 

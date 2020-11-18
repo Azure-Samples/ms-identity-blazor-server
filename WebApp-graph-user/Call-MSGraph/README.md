@@ -31,11 +31,11 @@ description: "This sample demonstrates how to call Microsoft Graph on behalf-of 
 
 ## Overview
 
-This sample demonstrates an ASP.NET Core Blazor Server application that authenticates users with [Azure Active Directory (Azure AD)](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis). It then acquires an [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) for Microsoft Graph and calls the [Microsoft Graph API](https://docs.microsoft.com/graph/overview).
+This sample demonstrates an ASP.NET Core Blazor Server application that authenticates users with [Azure Active Directory (Azure AD)](https://docs.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis). It then acquires an [Access Token](https://aka.ms/access-tokens) for Microsoft Graph and calls the [Microsoft Graph API](https://docs.microsoft.com/graph/overview).
 
 ## Scenario
 
-1. The client ASP.NET Core Blazor Server application uses the Microsoft Authentication Library [MSAL.Net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) and [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) libraries to obtain an [Access Token](https://docs.microsoft.com/azure/active-directory/develop/access-tokens) from **Azure AD**.
+1. The client ASP.NET Core Blazor Server application uses the Microsoft Authentication Library [MSAL.Net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) and [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) libraries to obtain an [Access Token](https://aka.ms/access-tokens) from **Azure AD**.
 1. The client application acquires an Access Token for Microsoft Graph.
 1. The **Access Token** is used as a *bearer* token to authorize the user to call the [Microsoft Graph API](https://docs.microsoft.com/graph/overview)
 1. **Microsoft Graph API** responds with the resource that the user has access to.
@@ -180,7 +180,9 @@ dotnet run
 ## Explore the sample
 
 1. Open your browser and navigate to `https://localhost:44318`.
-1. Select the **Sign in** button on the top right corner. When the user signs-in for the first time , a consent screen is presented with required permissions, select **Accept**. You will see claims from the signed-in user's token.
+1. Select the **Sign in** button on the top right corner. When the user signs-in for the first time , a consent screen is presented with required permissions, select **Accept**.
+
+    You will see claims from the signed-in user's token.
 
    ![UserClaims](./ReadmeFiles/UserClaims.png)
 
@@ -276,7 +278,7 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 
 ## Deployment
 
-See [README.md](../../Deploy-to-Azure/README.md) to deploy this sample to Azure.
+Refer to the [Azure deployment guide](../../Deploy-to-Azure/README.md) to deploy this sample code to an Azure App Service.
 
 ## More information
 

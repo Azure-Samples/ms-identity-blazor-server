@@ -43,6 +43,11 @@ namespace blazorserver_client
             _TodoListBaseAddress = configuration["TodoList:TodoListBaseAddress"];
         }
 
+        /// <summary>
+        /// Add a new ToDo item
+        /// </summary>
+        /// <param name="todo"></param>
+        /// <returns></returns>
         public async Task<ToDo> AddAsync(ToDo todo)
         {
             await PrepareAuthenticatedClient();
@@ -62,6 +67,11 @@ namespace blazorserver_client
             throw new HttpRequestException($"Invalid status code in the HttpResponseMessage: {response.StatusCode}.");
         }
 
+        /// <summary>
+        /// Delete a ToDo item
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task DeleteAsync(int id)
         {
             await PrepareAuthenticatedClient();
@@ -76,6 +86,11 @@ namespace blazorserver_client
             throw new HttpRequestException($"Invalid status code in the HttpResponseMessage: {response.StatusCode}.");
         }
 
+        /// <summary>
+        /// Edit a Todo item
+        /// </summary>
+        /// <param name="todo"></param>
+        /// <returns></returns>
         public async Task<ToDo> EditAsync(ToDo todo)
         {
             await PrepareAuthenticatedClient();
@@ -95,6 +110,10 @@ namespace blazorserver_client
             throw new HttpRequestException($"Invalid status code in the HttpResponseMessage: {response.StatusCode}.");
         }
 
+        /// <summary>
+        /// Retrieve all todo items
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<ToDo>> GetAsync()
         {
             await PrepareAuthenticatedClient();
@@ -110,6 +129,11 @@ namespace blazorserver_client
             throw new HttpRequestException($"Invalid status code in the HttpResponseMessage: {response.StatusCode}.");
         }
 
+        /// <summary>
+        /// Retrieves the Access Token for the Web API.
+        /// Sets Authorization and Accept headers for the request.
+        /// </summary>
+        /// <returns></returns>
         private async Task PrepareAuthenticatedClient()
         {
             var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(new[] { _TodoListScope });
@@ -118,6 +142,11 @@ namespace blazorserver_client
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        /// <summary>
+        /// Fetch todo item on the basis of id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ToDo> GetAsync(int id)
         {
             await PrepareAuthenticatedClient();
