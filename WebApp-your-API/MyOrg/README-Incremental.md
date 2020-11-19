@@ -39,7 +39,7 @@ In the third chapter, we extend our ASP.NET Core Blazor Server application to ca
 
 Continuing from  the [previous chapter](../../WebApp-graph-user/Call-MSGraph/README-Incremental.md) of the tutorial, this chapter adds the following steps:
 
-1. Secure a ASP.NET Core Web API with the Microsoft identity platform.
+1. Secure an ASP.NET Core Web API with the Microsoft identity platform.
 1. The client application acquires an [Access Token](https://aka.ms/access-tokens) for the Web API.
 1. The **Access Token** is used as a *bearer* token to authorize the user to call the Web API.
 

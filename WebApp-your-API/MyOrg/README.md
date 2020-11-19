@@ -37,8 +37,9 @@ This sample demonstrates an ASP.NET Core Blazor Server application calling an AS
 
 ## Scenario
 
+1. Secure an ASP.NET Core Web API with the Microsoft identity platform.
 1. The client ASP.NET Core Blazor Server application uses the Microsoft Authentication Library [MSAL.Net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) and [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) libraries to sign-in and obtain a JWT [Access Token](https://aka.ms/access-tokens) from **Azure AD**.
-2. The access token is used as a bearer token to authorize the user to call the ASP.NET Core Web API protected  **Azure AD**.
+1. The **Access Token** is used as a *bearer* token to authorize the user to call the Web API.
 
 ![Overview](./ReadmeFiles/topology.png)
 
