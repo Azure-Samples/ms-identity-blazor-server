@@ -31,16 +31,12 @@ This sample demonstrates an ASP.NET Core Blazor Server standalone application th
 
 This application uses **Implicit flow** grant type provided by Microsoft identity platform.
 
-![Overview](./ReadmeFiles/spa-app.svg)
+![Overview](./ReadmeFiles/topology.png)
 
 ## Scenario
 
 1. The ASP.NET Core Blazor Server standalone app uses the [Microsoft Authentication Library](https://docs.microsoft.com/azure/active-directory/develop/msal-overview) to obtain an [ID Token](https://docs.microsoft.com/azure/active-directory/develop/id-tokens) from **Azure AD B2C**:
 1. The **ID Token** proves that the user has successfully authenticated against **Azure AD B2C**.
-
-![Overview](./ReadmeFiles/sign-in.png)
-
-![Overview](./ReadmeFiles/topology.jpg)
 
 ## Prerequisites
 
