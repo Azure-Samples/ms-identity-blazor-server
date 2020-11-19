@@ -6,7 +6,7 @@ This sample demonstrates how to deploy a Blazor server application developed usi
 
 If you are coming from [Chapter 2](../WebApp-graph-user/Call-MSGraph) then start from [Steps to deploy Client app (WebApp-blazor-server)](####steps-to-deploy-client-app-(webApp-blazor-server)).
 
-For code sample from [Chapter 3](../WebApp-your-API/MyOrg), follow below steps:
+For code sample from [Chapter 3](../WebApp-your-API/MyOrg), follow below steps:[TODO]
 
 ## Deployment to Azure App Service
 
@@ -19,6 +19,7 @@ There are two web projects in this sample. To deploy them to **Azure App Service
 ## When creating Azure App Service instances and publishing the projects using **Visual Studio**
 
 Please follow the steps in [Create Azure App Service and Publish Project with Visual Studio](https://docs.microsoft.com/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019) to create App service instances and publish the projects using Visual Studio.
+Once published, please proceed to the [Update the project configuration](#update-the-project-configuration) section
 
 ## When creating Azure App Service instances and publishing the projects using **Visual Studio Code**
 
