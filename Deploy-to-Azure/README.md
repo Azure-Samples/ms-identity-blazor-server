@@ -1,4 +1,4 @@
-# Deployment
+# Deploy to Azure
 
 ## Overview
 
@@ -16,15 +16,15 @@ There are two web projects in this sample. To deploy them to **Azure App Service
 - publish the projects to the **App Service**, and
 - update its client(s) to call the web site instead of the local environment.
 
-## Create Azure App Service and publish the projects using Visual Studio
+## When creating Azure App Service instances and publishing the projects using **Visual Studio**
 
-Follow the link to [Create Azure App Service and Publish Project with Visual Studio](https://docs.microsoft.com/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019).
+Please follow the steps in [Create Azure App Service and Publish Project with Visual Studio](https://docs.microsoft.com/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019) to create App service instances and publish the projects using Visual Studio.
 
-## Create Azure App Service and publish the projects using Visual Studio Code
+## When creating Azure App Service instances and publishing the projects using **Visual Studio Code**
 
-### Steps to deploy Service (ToDoListService-aspnetcore)
+### Deploy the API (ToDoListService-aspnetcore) (Chapter #3 only)
 
-#### Step 1. Create and Publish `ToDoListService-aspnetcore` in an Azure App Service
+#### Create and Publish `ToDoListService-aspnetcore` to an Azure App Service
 
 1. Install the VS Code extension [Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice).
 1. Sign-in to App Service using Azure AD Account.
@@ -43,27 +43,7 @@ Follow the link to [Create Azure App Service and Publish Project with Visual Stu
 1. Select a runtime stack **.NET Core 3.1**, press Enter.
 1. Select Windows as the OS. Press Enter.
 
-#### Step 2. Update Azure App Service Configuration
-
-1. Go to [Azure portal](https://portal.azure.com), locate your app service.
-    - On the Settings tab, select Authentication / Authorization. Make sure `App Service Authentication` is Off. Select **Save**.
-1. Browse your website. If you see the default web page of the project, the publication was successful.
-
-#### Step 3. Update the Azure AD app registration for `ToDoListService-aspnetcore`
-
-1. Navigate back to to the [Azure portal](https://portal.azure.com).
-In the left-hand navigation pane, select the **Azure Active Directory** service, and then select **App registrations (Preview)**.
-1. In the resulting screen, select the `ToDoListService-aspnetcore` application.
-1. From the *Branding* menu, update the **Home page URL**, to the address of your service, for example [https://ToDoListService-aspnetcore.azurewebsites.net](https://ToDoListService-aspnetcore.azurewebsites.net). Save the configuration.
-
-### Update the `WebApp-blazor-server` to call the `ToDoListService-aspnetcore`
-
-1. In your IDE, go to the `Client` project.
-2. Open `Client\appsettings.json`.  Only one change is needed - update the `todo:TodoListBaseAddress` key value to be the address of the website you published,
-   for example, [https://ToDoListService-aspnetcore.azurewebsites.net](https://ToDoListService-aspnetcore.azurewebsites.net).
-3. Run the client! If you are trying multiple different client types (for example, .NET, Windows Store, Android, iOS, Electron etc.) you can have them all call this one published web API.
-
-### Steps to deploy Client app (WebApp-blazor-server)
+### Deploy Client app (WebApp-blazor-server or WebApp-calls-API-blazor-server) used in Chapter #2 and #3 both.
 
 #### Step 1. Create and Publish `WebApp-blazor-server` in an Azure App Service
 
@@ -82,11 +62,28 @@ In the left-hand navigation pane, select the **Azure Active Directory** service,
 1. Select a runtime stack **.NET Core 3.1**, press Enter.
 1. Select Windows as the OS. Press Enter.
 
-#### Step 2. Update Azure App Service Configuration
+## Check the deployed project after publication
 
-1. Go to [Azure portal](https://portal.azure.com).
+1. Go to [Azure portal](https://portal.azure.com), locate your app service.
     - On the Settings tab, select Authentication / Authorization. Make sure `App Service Authentication` is Off. Select **Save**.
 1. Browse your website. If you see the default web page of the project, the publication was successful.
+
+## Update the project configuration
+
+### Update the Azure AD app registration for `ToDoListService-aspnetcore`
+
+1. Navigate back to to the [Azure portal](https://portal.azure.com).
+In the left-hand navigation pane, select the **Azure Active Directory** service, and then select **App registrations (Preview)**.
+1. In the resulting screen, select the `ToDoListService-aspnetcore` application.
+1. From the *Branding* menu, update the **Home page URL**, to the address of your service, for example [https://ToDoListService-aspnetcore.azurewebsites.net](https://ToDoListService-aspnetcore.azurewebsites.net). Save the configuration.
+
+### Update the `WebApp-blazor-server` to call the `ToDoListService-aspnetcore`
+
+1. In your IDE, go to the `Client` project.
+1. Open `Client\appsettings.json`.  Only one change is needed - update the `todo:TodoListBaseAddress` key value to be the address of the website you published,
+   for example, [https://ToDoListService-aspnetcore.azurewebsites.net](https://ToDoListService-aspnetcore.azurewebsites.net).
+1. Publish the project again.
+1. Run the client! If you are trying multiple different client types (for example, .NET, Windows Store, Android, iOS, Electron etc.) you can have them all call this one published web API.
 
 #### Step 3. Update the Azure AD app registration for `WebApp-blazor-server`
 
