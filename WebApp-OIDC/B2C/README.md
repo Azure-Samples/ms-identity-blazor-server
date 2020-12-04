@@ -18,7 +18,8 @@ description: "This sample demonstrates how to enable your Blazor Server to sign-
  1. [Registration](#registration)
  1. [Running the sample](#running-the-sample)
  1. [Explore the sample](#explore-the-sample)
- 1. [About the code](#about-the-code)
+ 1. [About the code](#about-the-code) 
+ 1. [Next chapter of the tutorial: the Web app calls Web API](#next-chapter-of-the-tutorial-the-web-app-calls-web-api)
  1. [More information](#more-information)
  1. [Community Help and Support](#community-help-and-support)
  1. [Contributing](#contributing)
@@ -87,12 +88,14 @@ Please refer to: [Tutorial: Add identity providers to your applications in Azure
 1. In the **Register an application page** that appears, enter your application's registration information:
    - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `WebApp-blazor-server-b2c`.
    - Under **Supported account types**, select **Accounts in any identity provider or organizational directory (for authenticating users with user flows)**.
-   - In the **Redirect URI** section, select **Web** in the combo-box and enter the following redirect URI: `https://localhost:44365/authentication/login-callback`.
+   - In the **Redirect URI** section, select **Web** in the combo-box and enter the following redirect URI: `https://localhost:44365/`.
      > Note that there are more than one redirect URIs used in this sample. You'll need to add them from the **Authentication** tab later after the app has been created successfully.
 1. Confirm that Permissions > **Grant admin consent to openid and offline_access permissions** is selected.
 1. Select **Register** to create the application.
 1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
 1. In the app's registration screen, select **Authentication** in the menu.
+   - In the **Redirect URIs** section, enter the following redirect URIs.
+      - `https://localhost:44365/signin-oidc`
    - In the **Logout URL** section, set it to `https://localhost:44365/signout-oidc`.
    - In **Implicit grant** section,  select the check boxes for **Access tokens** and **ID tokens**.
 1. Select **Save** to save your changes.
@@ -104,8 +107,12 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `blazorserver-B2C\appsettings.json` file.
+1. Find the key `Instance` and replace the value with your tenant name. For example, `https://fabrikam.b2clogin.com`
 1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of the `WebApp-blazor-server-b2c` application copied from the Azure portal.
-1. Find the key `Authority` and populate it with your policy authority strings e.g. `https://<your-tenant-name>.b2clogin.com/<your-tenant-name>.onmicrosoft.com/B2C_1_signupsignin`.
+1. Find the key `Domain` and replace the existing value with your Azure AD tenant name.
+1. Find the key `SignUpSignInPolicyId` and replace with the name of the `Sign up and sign in` policy you created.
+1. Find the key `ResetPasswordPolicyId` and replace with the name of the `Password reset` policy you created.
+1. Find the key `EditProfilePolicyId` and replace with the name of the `Profile editing` policy you created.
 
 ## Running the sample
 
@@ -174,7 +181,7 @@ Create the Web App using Blazor Server template:
 1. In `Startup.cs`, add below lines of code in **ConfigureServices** method:
 
     ```csharp
-    services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureAdB2C"); 
+    services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureAdB2C");
     ```
 
     This enables your application to authenticate users.
@@ -212,13 +219,18 @@ Create the Web App using Blazor Server template:
     }
     ```
 
+## Next chapter of the tutorial: the Web app calls Web API
+
+Navigate to the chapter [Secure and call a Web API with the Microsoft identity platform](../../WebApp-your-API/B2C/README-Incremental.md) to learn about securing and calling Web APIs.
+
 ## More information
 
 - [What is Azure Active Directory B2C?](https://docs.microsoft.com/azure/active-directory-b2c/overview)
-- [Secure an ASP.NET Core Blazor WebAssembly standalone app with Azure Active Directory B2C](https://docs.microsoft.com/aspnet/core/blazor/security/webassembly/standalone-with-azure-active-directory-b2c)
 - [Application types that can be used in Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/application-types)
 - [Recommendations and best practices for Azure Active Directory B2C](https://docs.microsoft.com/azure/active-directory-b2c/best-practices)
 - [Azure AD B2C session](https://docs.microsoft.com/azure/active-directory-b2c/session-overview)
+- [Secure ASP.NET Core Blazor Server apps](https://docs.microsoft.com/aspnet/core/blazor/security/server/?view=aspnetcore-5.0&tabs=visual-studio)
+- [ASP.NET Core Blazor Server additional security scenarios](https://docs.microsoft.com/aspnet/core/blazor/security/server/additional-scenarios?view=aspnetcore-5.0)
 
 For more information about how OAuth 2.0 protocols work in this scenario and other scenarios, see [Authentication Scenarios for Azure AD](https://docs.microsoft.com/azure/active-directory/develop/authentication-flows-app-scenarios).
 
