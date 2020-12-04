@@ -27,6 +27,8 @@ description: "This sample demonstrates an ASP.NET Core Blazor Server application
  1. [Contributing](#contributing)
  1. [Code of Conduct](#code-of-conduct)
 
+![.NET Core](https://github.com/Azure-Samples/ms-identity-blazor-server/workflows/.NET%20Core/badge.svg)
+
 ## Overview
 
 In the second chapter, we extend our ASP.NET Core Blazor Server application to call a downstream ASP.NET Core Web API that is secured using Azure AD B2C.

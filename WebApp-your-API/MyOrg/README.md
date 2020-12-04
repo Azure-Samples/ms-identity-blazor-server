@@ -3,8 +3,6 @@ page_type: sample
 languages:
   - csharp
 products:
-  - dotnet
-  - aspnet
   - aspnet-core
   - dotnet-core
   - azure-active-directory  
@@ -58,8 +56,6 @@ From your shell or command line:
 ```console
 cd ms-identity-blazor-server\WebApp-your-API\MyOrg
 ```
-
-> :warning: To avoid path length limitations on Windows, we recommend cloning into a directory near the root of your drive.
 
 ### Register the sample application(s) with your Azure Active Directory tenant
 
@@ -261,7 +257,7 @@ Were we successful in addressing your learning objective? [Do consider taking a 
     ```csharp
    services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
            .EnableTokenAcquisitionToCallDownstreamApi(new string[] { Configuration["TodoList:TodoListScope"] })
-           .AddInMemoryTokenCaches(); ;
+           .AddInMemoryTokenCaches();
     ```
 
     This enables your application to use the Microsoft identity platform endpoint to sign-in users and to call the protected Web API.
@@ -270,6 +266,13 @@ Were we successful in addressing your learning objective? [Do consider taking a 
 
     ```csharp
    services.AddToDoListService(Configuration);
+    ```
+
+    Below code adds the incremental consent and conditional access handler for Blazor server side pages.
+
+    ```csharp
+    services.AddServerSideBlazor()
+                .AddMicrosoftIdentityConsentHandler();
     ```
 
 1. **Index.razor** is the landing page when application starts. Index.razor contains child component called `UserClaims`. If user is authenticated successfully, `UserClaims` displays a few claims present in the ID Token issued by Azure AD.

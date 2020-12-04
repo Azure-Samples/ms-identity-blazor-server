@@ -3,8 +3,6 @@ page_type: sample
 languages:
   - csharp
 products:
-  - dotnet
-  - aspnet
   - aspnet-core
   - dotnet-core
   - azure-active-directory  
@@ -91,7 +89,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `TenantId` and replace the existing value with your Azure AD tenant ID.
 1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of the `ToDoListService-aspnetcore` application copied from the Azure portal.
 
-### Update the Registration Register the web app (WebApp-blazor-server)
+### Update the registration for the web app (WebApp-blazor-server)
 
 1. In **App registrations** page, find the *WebApp-blazor-server* app.
 1. In the app's registration screen, select **Authentication** in the menu.
@@ -197,12 +195,12 @@ For details about the code to enable your Blazor Server application to sign-in u
 
 This section, here, is only about the additional code added to let the Web app call the protected Web API.
 
-1. In Startup.cs, add below lines of code in `ConfigureServices` method:
+1. In `Startup.cs`, add below lines of code in **ConfigureServices** method:
 
     ```csharp
    services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
            .EnableTokenAcquisitionToCallDownstreamApi(new string[] { Configuration["TodoList:TodoListScope"] })
-           .AddInMemoryTokenCaches(); ;
+           .AddInMemoryTokenCaches();
     ```
 
     This enables your application to use the Microsoft identity platform endpoint to sign-in users and to call the protected Web API.

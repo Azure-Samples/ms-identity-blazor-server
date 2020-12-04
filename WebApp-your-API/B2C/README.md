@@ -27,11 +27,14 @@ description: "This sample demonstrates an ASP.NET Core Blazor Server application
  1. [Contributing](#contributing)
  1. [Code of Conduct](#code-of-conduct)
 
+![.NET Core](https://github.com/Azure-Samples/ms-identity-blazor-server/workflows/.NET%20Core/badge.svg)
+
 ## Overview
 
 This sample demonstrates an ASP.NET Core Blazor Server application calling an ASP.NET Core Web API that is secured using Azure AD B2C.
 
 ## Scenario
+
 1. Secure an ASP.NET Core Web API with the Microsoft identity platform.
 1. The client ASP.NET Core Blazor Server application uses the Microsoft Authentication Library [MSAL.Net](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet) and [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) libraries to sign-in and obtain a JWT [Access Token](https://aka.ms/access-tokens) from **Azure AD B2C**.
 1. The **Access Token** is used as a *bearer* token to authorize the user to call the Web API.
