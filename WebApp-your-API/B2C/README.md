@@ -92,7 +92,7 @@ The first thing that we need to do is to declare the unique [resource](https://d
    - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
 1. All Apis have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `access_as_user`.
+        - For **Scope name**, use `read`.
         - Select **Admins and users** options for **Who can consent?**
         - For **Admin consent display name** type `Access ToDoListService-aspnetcore`
         - For **Admin consent description** type `Allows the app to access ToDoListService-aspnetcore as the signed-in user.`
@@ -144,6 +144,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - In the list of APIs, select the API `ToDoListService-aspnetcore`.
    - In the **Delegated permissions** section, select the **Access 'ToDoListService-aspnetcore'** in the list. Use the search box if necessary.
    - Select the **Add permissions** button at the bottom.
+   - Select **Grant admin consent**.
 
 #### Configure the Web app (WebApp-calls-API-blazor-server) to use your app registration
 
