@@ -6,12 +6,13 @@ products:
   - aspnet-core
   - dotnet-core
   - azure-active-directory-b2c
-name: Enable your Blazor Server to sign-in users and call Web API with the Microsoft identity platform in Azure AD B2C
+  - msal-dotnet
+name: Enable your Blazor Server to sign-in users and call web API with the Microsoft identity platform in Azure AD B2C
 urlFragment: ms-identity-blazor-server
-description: "This sample demonstrates an ASP.NET Core Blazor Server application calling an ASP.NET Core Web API that is secured using Azure AD B2C"
+description: "This sample demonstrates an ASP.NET Core Blazor Server application calling an ASP.NET Core web API that is secured using Azure AD B2C"
 ---
 
-# Enable your Blazor Server to sign-in users and call Web API with the Microsoft identity platform in Azure AD B2C
+# Enable your Blazor Server to sign-in users and call web API with the Microsoft identity platform in Azure AD B2C
 
  1. [Overview](#overview)
  1. [Scenario](#scenario)
@@ -31,13 +32,13 @@ description: "This sample demonstrates an ASP.NET Core Blazor Server application
 
 ## Overview
 
-In the second chapter, we extend our ASP.NET Core Blazor Server application to call a downstream ASP.NET Core Web API that is secured using Azure AD B2C.
+In the second chapter, we extend our ASP.NET Core Blazor Server application to call a downstream ASP.NET Core web API that is secured using Azure AD B2C.
 
 ## Scenario
 
 Continuing from  the [previous chapter](../../WebApp-OIDC/B2C/README.md) of the tutorial, this chapter adds the following steps:
 
-1. Secure an ASP.NET Core Web API with the Microsoft identity platform.
+1. Secure an ASP.NET Core web API with the Microsoft identity platform.
 1. The client application acquires an [Access Token](https://aka.ms/access-tokens) for the Web API.
 1. The **Access Token** is used as a *bearer* token to authorize the user to call the Web API.
 
@@ -73,8 +74,6 @@ The first thing that we need to do is to declare the unique [resource](https://d
         - Select **Admins and users** options for **Who can consent?**
         - For **Admin consent display name** type `Access ToDoListService-aspnetcore`
         - For **Admin consent description** type `Allows the app to access ToDoListService-aspnetcore as the signed-in user.`
-        - For **User consent display name** type `Access ToDoListService-aspnetcore`
-        - For **User consent description** type `Allow the application to access ToDoListService-aspnetcore on your behalf.`
         - Keep **State** as **Enabled**
         - Select the **Add scope** button on the bottom to save this scope.
 
@@ -89,10 +88,8 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of the `ToDoListService-aspnetcore` application copied from the Azure portal.
 1. Find the key `Domain` and replace the existing value with your Azure AD tenant name.
 1. Find the key `SignUpSignInPolicyId` and replace with the name of the `Sign up and sign in` policy you created.
-1. Find the key `ResetPasswordPolicyId` and replace with the name of the `Password reset` policy you created.
-1. Find the key `EditProfilePolicyId` and replace with the name of the `Profile editing` policy you created.
 
-### Update the registration for the Web app (WebApp-calls-API-blazor-server)
+### Update the registration for the web app (WebApp-calls-API-blazor-server)
 
 1. In **App registrations** page, find the *WebApp-calls-API-blazor-server* app.
 1. In the app's registration screen, select the **Certificates & secrets** blade in the left to open the page where we can generate secrets and upload certificates.
@@ -107,8 +104,9 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - In the list of APIs, select the API `ToDoListService-aspnetcore`.
    - In the **Delegated permissions** section, select the **Access 'ToDoListService-aspnetcore'** in the list. Use the search box if necessary.
    - Select the **Add permissions** button at the bottom.
+   - Select **Grant admin consent**.																																			   
 
-#### Configure the Web app (WebApp-calls-API-blazor-server) to use your app registration
+#### Configure the web app (WebApp-calls-API-blazor-server) to use your app registration
 
 Open the project in your IDE (like Visual Studio or Visual Studio Code) to configure the code.
 
@@ -116,7 +114,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 1. Open `WebApp-your-API\B2C\Client\appsettings.json` file and copy the keys from "AzureAd" section of previous chapter's `WebApp-OIDC\B2C\blazorserver-B2C\appsettings.json` file.
 1. Find the key `ClientSecret` and replace the existing value with the key you saved during the creation of the `WebApp-calls-API-blazor-server` app, in the Azure portal.
-1. Find the key `TodoListScope` and replace the existing value with Scope.
+1. Find the key `TodoListScope` and replace the value with API Scope defined in the Azure portal.
 1. Find the key `TodoListBaseAddress` and replace the existing value with the base address of the ToDoListService-aspnetcore project (by default `https://localhost:44332`).
 
 ## Running the sample
@@ -127,12 +125,12 @@ You can run the sample by using either Visual Studio or command line interface a
 
 Clean the solution, rebuild the solution, and run it. You might want to go into the solution properties and set both projects as startup projects, with the service project starting first.
 
-When you start the Web API from Visual Studio, depending on the browser you use, you'll get:
+When you start the web API from Visual Studio, depending on the browser you use, you'll get:
 
 - an empty web page (with Microsoft Edge)
 - or an error HTTP 401 (with Chrome)
 
-This behavior is expected as the browser is not authenticated. The Web application will be authenticated, so it will be able to access the Web API.
+This behavior is expected as the browser is not authenticated. The Web application will be authenticated, so it will be able to access the web API.
 
 ### Run the sample using a command line interface such as VS Code integrated terminal
 
@@ -196,7 +194,7 @@ Were we successful in addressing your learning objective? [Do consider taking a 
             .AddInMemoryTokenCaches();
     ```
 
-    This enables your application to use the Microsoft identity platform endpoint to sign-in users and to call the protected Web API.
+    This enables your application to use the Microsoft identity platform endpoint to sign-in users and to call the protected web API.
 
     The following code registers client service to use the HttpClient by dependency injection.
 
