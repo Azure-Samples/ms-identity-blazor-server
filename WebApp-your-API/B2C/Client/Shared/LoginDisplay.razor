@@ -1,6 +1,7 @@
 ﻿<AuthorizeView>
     <Authorized>
         Hello, @context.User.Identity.Name!
+        <a href="MicrosoftIdentity/Account/EditProfile" class="btn btn-primary">Edit Profile</a>
         <a href="MicrosoftIdentity/Account/SignOut">Log out</a>
     </Authorized>
     <NotAuthorized>

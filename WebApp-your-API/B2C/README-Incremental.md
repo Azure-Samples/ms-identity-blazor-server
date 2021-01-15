@@ -38,9 +38,8 @@ In the second chapter, we extend our ASP.NET Core Blazor Server application to c
 
 Continuing from  the [previous chapter](../../WebApp-OIDC/B2C/README.md) of the tutorial, this chapter adds the following steps:
 
-1. Secure an ASP.NET Core web API with the Microsoft identity platform.
 1. The client application acquires an [Access Token](https://aka.ms/access-tokens) for the Web API.
-1. The **Access Token** is used as a *bearer* token to authorize the user to call the Web API.
+1. The **Access Token** is used as a *bearer* token to authorize the user to call secure ASP.NET Core web API.
 
 ![Overview](./ReadmeFiles/topology.png)
 

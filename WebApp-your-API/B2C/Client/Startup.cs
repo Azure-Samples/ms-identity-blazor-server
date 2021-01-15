@@ -24,12 +24,6 @@ namespace blazorserver_client
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            // This is required to be instantiated before the OpenIdConnectOptions starts getting configured.
-            // By default, the claims mapping will map claim names in the old format to accommodate older SAML applications.
-            // 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role' instead of 'roles'
-            // This flag ensures that the ClaimsIdentity claims collection will be built from the claims in the token.
-            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
-
             // Add authentication with Microsoft identity platform.
             // EnableTokenAcquisitionToCallDownstreamApi adds support for the web app to acquire tokens to call the web API.
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureAdB2C")

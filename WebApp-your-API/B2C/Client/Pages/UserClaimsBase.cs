@@ -21,7 +21,7 @@ namespace blazorserver_client.Pages
         protected IEnumerable<Claim> _claims = Enumerable.Empty<Claim>();
 
         // Defines list of claim types that will be displayed after successfull sign-in.
-        private string[] printClaims = { "name", "idp", "oid", "jobTitle", "emails" };
+        private string[] printClaims = { "name", "jobTitle", "city" };
 
         protected override async Task OnInitializedAsync()
         {
