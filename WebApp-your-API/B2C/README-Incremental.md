@@ -86,6 +86,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 1. Find the key `Instance` and replace the value with your tenant name. For example, `https://fabrikam.b2clogin.com`
 1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of the `ToDoListService-aspnetcore` application copied from the Azure portal.
 1. Find the key `Domain` and replace the existing value with your Azure AD tenant name.
+1. Find the key `SignedOutCallbackPath` and add the name of the `Sign up and sign in` policy you created.
 1. Find the key `SignUpSignInPolicyId` and replace with the name of the `Sign up and sign in` policy you created.
 
 ### Update the registration for the web app (WebApp-calls-API-blazor-server)
@@ -103,7 +104,7 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
    - In the list of APIs, select the API `ToDoListService-aspnetcore`.
    - In the **Delegated permissions** section, select the **Access 'ToDoListService-aspnetcore'** in the list. Use the search box if necessary.
    - Select the **Add permissions** button at the bottom.
-   - Select **Grant admin consent**.																																			   
+   - Select **Grant admin consent**.
 
 #### Configure the web app (WebApp-calls-API-blazor-server) to use your app registration
 
