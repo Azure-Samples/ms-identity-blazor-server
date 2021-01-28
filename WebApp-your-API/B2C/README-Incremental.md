@@ -66,14 +66,13 @@ cd ms-identity-blazor-server\WebApp-your-API\B2C
 1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can declare the parameters to expose this app as an Api for which client applications can obtain [access tokens](https://aka.ms/access-tokens) for.
 The first thing that we need to do is to declare the unique [resource](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow) URI that the clients will be using to obtain access tokens for this Api. To declare an resource URI, follow the following steps:
    - Select `Set` next to the **Application ID URI** to generate a URI that is unique for this app.
-   - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
+   - For this sample, accept the proposed Application ID URI (`https://{tenantName}.onmicrosoft.com/{clientId}`) by selecting **Save**.
 1. All Apis have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
    - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
         - For **Scope name**, use `access_as_user`.
-        - Select **Admins and users** options for **Who can consent?**
-        - For **Admin consent display name** type `Access ToDoListService-aspnetcore`
-        - For **Admin consent description** type `Allows the app to access ToDoListService-aspnetcore as the signed-in user.`
-        - Keep **State** as **Enabled**
+        - For **Admin consent display name** type `Access TodoListService-aspnetcore-webapi`.
+        - For **Admin consent description** type `Allows the app to access TodoListService-aspnetcore-webapi as the signed-in user.`
+        - Keep **State** as **Enabled**.
         - Select the **Add scope** button on the bottom to save this scope.
 
 #### Configure the service app (ToDoListService-aspnetcore) to use your app registration
