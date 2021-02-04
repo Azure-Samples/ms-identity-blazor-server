@@ -68,7 +68,7 @@ We recommend following the chapters in successive order. However, the code sampl
 |                |               |
 |----------------|---------------|
 | <img src="./WebApp-your-API/MyOrg/ReadmeFiles/topology.png" width="200"> | [**Protect and call a web API on Azure AD**](./WebApp-your-API/MyOrg) </br> Protect your web API with the Azure AD. Use a client application to sign-in a user, acquire an Access Token for your web API and call your protected Web API. |
-| <img src="./WebApp-your-API/B2C/ReadmeFiles/topology.png" width="200"> | [**Protect and call a web API on Azure AD B2C**](./WebApp-your-APIC/B2C) </br> Protect your web API with the Azure AD B2C. Sign-in a user using a client application, acquire an Access Token for your web API and call your protected Web API. |
+| <img src="./WebApp-your-API/B2C/ReadmeFiles/topology.png" width="200"> | [**Protect and call a web API on Azure AD B2C**](./WebApp-your-API/B2C) </br> Protect your web API with the Azure AD B2C. Sign-in a user using a client application, acquire an Access Token for your web API and call your protected Web API. |
 
 ### Chapter 4: Deploy your solutions to Azure
 
