@@ -87,7 +87,7 @@ Please refer to: [Tutorial: Add identity providers to your applications in Azure
 1. In the **Register an application page** that appears, enter your application's registration information:
    - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `WebApp-blazor-server-b2c`.
    - Under **Supported account types**, select **Accounts in any identity provider or organizational directory (for authenticating users with user flows)**.
-   - In the **Redirect URI** section, select **Web** in the combo-box and enter the following redirect URI: `https://localhost:44365/authentication/login-callback`.
+   - In the **Redirect URI** section, select **Web** in the combo-box and enter the following redirect URI: `https://localhost:44365/signin-oidc`.
      > Note that there are more than one redirect URIs used in this sample. You'll need to add them from the **Authentication** tab later after the app has been created successfully.
 1. Confirm that Permissions > **Grant admin consent to openid and offline_access permissions** is selected.
 1. Select **Register** to create the application.
