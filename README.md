@@ -76,7 +76,7 @@ We recommend following the chapters in successive order. However, the code sampl
 |-----------------|---------------|
 | <img src="./Deploy-to-Azure/ReadmeFiles/topology.png" width="200"> | [**Deploy to Azure App Services**](./Deploy-to-Azure) </br> Finally, we prepare your app for deployment to various Azure services. Learn how to package and upload files, Configure authentication parameters and use the various Azure services for managing your operations. |
 
-### Chapter 5: Connect to Azure SQL Database using AAD access token
+### Chapter 5: Connect to Azure SQL Database using Azure AD authentication
 
 |                 |               |
 |-----------------|---------------|
