@@ -16,7 +16,7 @@
  When the application will be logged in, it will try to connect to Azure SQL Database with an [Access Token](https://aka.ms/access-tokens) it acquired for the currently logged-in user.
  Successful connection will be indicated when the page will state that the user is logged-in into the database and a table with mock forecast data is displayed.
 
- ![fetch_data_page](ReadmeFiles/fetch-data-page.png)
+ ![fetch_data_page](./Client/ReadmeFiles/fetch-data-page.png)
 
  The page displays a message with user and host names that are values of @user and @host on SQL Database.
 
