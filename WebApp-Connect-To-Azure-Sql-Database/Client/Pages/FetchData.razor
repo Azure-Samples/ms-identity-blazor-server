@@ -1,0 +1,69 @@
+﻿@page "/fetchdata"
+
+@using ms_identity_dotnet_blazor_azure_sql.AAD
+@using ms_identity_dotnet_blazor_azure_sql.Data
+@inject WeatherForecastService ForecastService
+@inject UserAADService UserAADService
+@inject AuthenticationStateProvider GetAuthenticationStateAsync
+
+<h1>Weather forecast</h1>
+<h4><strong>@_greetingsMessage</strong></h4>
+
+<p>This component demonstrates fetching data from a service that is connected to SQL database.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[] forecasts;
+    private string _loggedUser;
+    private string _greetingsMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //obtain current authentication state of the application from HttpContext.User - https://docs.microsoft.com/aspnet/core/blazor/security/server/
+        var authstate = await GetAuthenticationStateAsync.GetAuthenticationStateAsync();
+
+        //obtain user name from the underlying database based on logged-in user information
+        _loggedUser = await UserAADService.GetDatabaseLoggedInUser(authstate);
+
+        if (_loggedUser == "N/A")
+        {
+            _greetingsMessage = "Could not obtian logged-in user. Please Log Out of the current user and re-login.";
+        }
+        else
+        {
+            //set greetings message with user name obtained from database
+            _greetingsMessage = $"The user logged into SQL Database is {_loggedUser}";
+
+            //fetch data for the user
+            forecasts = await ForecastService.GetForecastAsync(DateTime.Now, authstate);
+        }
+    }
+}

@@ -1,0 +1,147 @@
+{
+  "Sample": {
+    "Author": "v-abeyderman",
+    "Title": "How to use an authenticated user's credentials for log-in to an Azure SQL Database from Blazor Web Server App",
+    "Level": 300,
+    "Client": ".NET Blazor Server App",
+    "RepositoryUrl": "ms-identity-dotnet-blazor-azure-sql",
+    "Endpoint": "AAD v2.0",
+    "Description": "This sample demonstrates how to use access token obtained from AAD for connecting to Azure SQL Server database as a user that is logged in into the application.",
+    "Languages": [
+      "csharp",
+      "t-sql"
+    ],
+    "Products": [
+      "aspnet-core",
+      "blazor",
+      "azure-active-directory",
+      "azure-sql"
+    ]
+  },
+  
+  /*
+    This section describes different regions of readme file
+  */
+  "ReadmeScenario": {
+    "FreeText": "This sample demonstrates a Blazor Server App querying an Azure SQL Database with the same authenticated user logged-in into the database. In other words, SQL Database will act exactly for user logged-in instead of active with administrator access rights.\n",
+    "Image": "ReadmeFiles/topology.png",
+    /* put additional notes, will be displayed right after image*/
+    "AdditionalNotes": "\n"
+  },
+
+  "ReadmePrerequirements": {
+    "FreeText": "* Either [Visual Studio](https://visualstudio.microsoft.com/downloads/) or [Visual Studio Code](https://code.visualstudio.com/download) and [.NET Core SDK](https://www.microsoft.com/net/learn/get-started)\n* Azure subscription and Tenant with at least one user created in it\n* Azure [SQL Database](https://docs.microsoft.com/azure/azure-sql/database/single-database-create-quickstart)"
+  },
+
+  "ReadmeSetup": {
+    "FreeText": "",
+    "IncludeFilePath": "",
+    "UseNewSetup": "1", /* when set to 0, only legacy setup will be used */
+    "CertificateOption": "0", /* 1 when a certificate can be used instead of secret*/
+    "CreateProjectIncludeFilePath": "../ReadmeFiles/CreateProjectSteps.md",
+    "AppRegistrationIncludeFilePath": "../ReadmeFiles/AppRegistrationSteps.md",
+    "RunSampleIncludeFilePath": ""
+  },
+
+  /* It either can be a text or link to another readme file */
+  "ReadmeTroubleshooting": {
+    "IncludeFilePath": "../ReadmeFiles/ReadmeTroubleshooting.md"
+  },
+
+  /* It either can be a text or link to another readme file */
+  "ReadmeNextSteps": {
+    "FreeText": "",
+    "IncludeFilePath": ""
+  },
+
+  /* It either can be a text or link to another readme file */
+  "ReadmeHowTheCodeWasCreated": {
+    "IncludeFilePath": "../ReadmeFiles/ReadmeHowTheCodeWasCreated.md"
+  },
+
+  /* It either can be a text or link to another readme file */
+  "ReadmeAboutTheCode": {
+    "IncludeFilePath": "../ReadmeFiles/ReadmeAboutTheCode.md" 
+   },
+
+  /* It either can be a text or link to another readme file */
+  "ReadmeAzureDeploy": {
+    "IncludeFilePath": "../ReadmeFiles/ReadmeAzureDeploy.md"
+    },
+
+  /* It either can be a text or link to another readme file */
+  "ReadmeUsingTheSample": {
+    "IncludeFilePath": "../ReadmeFiles/ReadmeUsingTheSample.md"
+  },
+
+  /* It either can be a text or link to another readme file */
+  "ReadmeLearnMore": {
+    "IncludeFilePath": "../ReadmeFiles/ReadmeLearnMore.md"
+  },
+
+  /* It either can be a text or link to another readme file */
+  "ReadmeContributing": {
+    "IncludeFilePath": "../ReadmeFiles/ReadmeContributing.md"
+  },
+
+  /*
+    This section describes the Azure AD Applications to configure, and their dependencies
+  */
+  "AADApps": [
+    {
+      "Id": "client",
+      "Name": "ClientApp-blazor-azuresql",
+      "Kind": "WebApp",
+      "Audience": "AzureADMyOrg",
+      "HomePage": "https://localhost:44348/",
+      "ReplyUrls": "https://localhost:44348/, https://localhost:44348/signin-oidc",
+      "LogoutUrl": "https://localhost:44348/signout-oidc",
+      "PasswordCredentials": "Auto",
+      "ManualSteps": [],
+      "EnableAccessTokenIssuance": "false",
+      "EnableIdTokenIssuance":"true",
+      "Sample": {
+        "SampleSubPath": "./WebApp-Connect-To-Azure-Sql-Database/",
+        "ProjectDirectory": "Client"
+      },
+      "RequiredResourcesAccess": [
+        {
+          "Resource": "Azure SQL Database",
+          "DelegatedPermissions": [ "user_impersonation" ]
+        }
+      ]
+    }
+  ],
+
+  /*
+    This section describes how to update the code in configuration files from the apps coordinates, once the apps
+    are created in Azure AD.
+    Each section describes a configuration file, for one of the apps, it's type (XML, JSon, plain text), its location
+    with respect to the root of the sample, and the mappping (which string in the config file is mapped to which value
+  */
+  "CodeConfiguration": [
+    {
+      "App": "Client",
+      "SettingKind": "Text",
+      "SettingFile": "\\..\\appsettings.json",
+      "Mappings": [
+        {
+          "key": "Domain",
+          "value": "$tenantName"
+        },
+        {
+          "key": "TenantId",
+          "value": "$tenantId"
+        },
+        {
+          "key": "ClientId",
+          "value": ".AppId"
+        },
+        {
+          "key": "ClientSecret",
+          "value": ".AppKey"
+        }
+      ]
+    }
+  ]
+}

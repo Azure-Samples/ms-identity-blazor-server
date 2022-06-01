@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "identityapp1": {
+      "resourceId": null,
+      "type": "identityapp.aad",
+      "connectionId": null,
+      "secretStore": null
+    }
+  }
+}

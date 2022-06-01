@@ -76,6 +76,12 @@ We recommend following the chapters in successive order. However, the code sampl
 |-----------------|---------------|
 | <img src="./Deploy-to-Azure/ReadmeFiles/topology.png" width="200"> | [**Deploy to Azure App Services**](./Deploy-to-Azure) </br> Finally, we prepare your app for deployment to various Azure services. Learn how to package and upload files, Configure authentication parameters and use the various Azure services for managing your operations. |
 
+### Chapter 5: Connect to Azure SQL Database using Azure AD authentication
+
+|                 |               |
+|-----------------|---------------|
+| <img src="./WebApp-Connect-To-Azure-Sql-Database/Client/ReadmeFiles/topology.png" width="200"> | [**Connect to Azure SQL Database**](./WebApp-Connect-To-Azure-Sql-Database) </br> Signing into AAD and use the same Access Token to login into Azure SQL Database. |
+
 ## We'd love your feedback!
 
 Were we successful in addressing your learning objective? [Do consider taking a moment to share your experience with us.](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUMFJCNURBV1g2UTlKQjZTOTFGS09ZNjVMNSQlQCN0PWcu)
