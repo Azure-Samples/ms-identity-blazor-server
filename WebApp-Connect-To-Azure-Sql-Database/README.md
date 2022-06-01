@@ -37,7 +37,7 @@ Table Of Contents
 
 This sample demonstrates a Blazor Server App querying an Azure SQL Database with the same authenticated user logged-in into the database. In other words, SQL Database will act exactly for user logged-in instead of active with administrator access rights.
 
-![Scenario Image](ReadmeFiles/topology.png)
+![Scenario Image](./Client/ReadmeFiles/topology.png)
 
 
 ## Prerequisites
@@ -266,7 +266,7 @@ To provide a recommendation, visit the following [User Voice page](https://feedb
  When the application will be logged in, it will try to connect to Azure SQL Database with an [Access Token](https://aka.ms/access-tokens) it acquired for the currently logged-in user.
  Successful connection will be indicated when the page will state that the user is logged-in into the database and a table with mock forecast data is displayed.
 
- ![fetch_data_page](ReadmeFiles/fetch-data-page.png)
+ ![fetch_data_page](./Client/ReadmeFiles/fetch-data-page.png)
 
  The page displays a message with user and host names that are values of @user and @host on SQL Database.
 
