@@ -106,15 +106,9 @@ or download and extract the repository .zip file.
    Create a user in database from users in your Tenant and grant them EXECUTE permission by running next set of commands.
    You can add more directory users to this database by running these statements repeatedly.
    **/
-   DECLARE @AADDBUser nvarchar(128)
-   SET @AADDBUser = '<myusername>@<mytenant>.onmicrosoft.com'
-
-   DECLARE @sql as varchar(max)
-   SET @SQL = 'CREATE USER [' + @AADDBUser + '] FROM EXTERNAL PROVIDER;
-   EXECUTE sp_addrolemember db_datareader, ''' + @AADDBUser + ''';
-   grant execute to ''' + @AADDBUser +''''
-
-   EXEC @SQL
+   CREATE USER [<myusername>@<mytenant>.onmicrosoft.com] FROM EXTERNAL PROVIDER;
+   EXECUTE sp_addrolemember db_datareader, '<myusername>@<mytenant>.onmicrosoft.com';
+   grant execute to [kkrishna@devworkshopdemo.onmicrosoft.com];
    ```
 
 5. Update connection string inside appsettings.json with server and database names
