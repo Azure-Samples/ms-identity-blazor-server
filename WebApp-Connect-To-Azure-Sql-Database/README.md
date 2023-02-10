@@ -108,7 +108,7 @@ or download and extract the repository .zip file.
    **/
    CREATE USER [<myusername>@<mytenant>.onmicrosoft.com] FROM EXTERNAL PROVIDER;
    EXECUTE sp_addrolemember db_datareader, '<myusername>@<mytenant>.onmicrosoft.com';
-   grant execute to [kkrishna@devworkshopdemo.onmicrosoft.com];
+   grant execute to [<myusername>@<mytenant>.onmicrosoft.com];
    ```
 
 5. Update connection string inside appsettings.json with server and database names
