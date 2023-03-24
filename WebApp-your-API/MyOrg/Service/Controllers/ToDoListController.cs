@@ -25,13 +25,14 @@ SOFTWARE.
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web;
 using System.Collections.Generic;
 using System.Linq;
 using ToDoListModel;
 
 namespace TodoListService.Controllers
 {
-    [Authorize]
+    [AuthorizeForScopes(Scopes = new[] {"access_as_user"})]
     [Route("api/[controller]")]
     public class TodoListController : Controller
     {
