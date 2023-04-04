@@ -1,8 +1,8 @@
 ﻿@page "/edit/{Id:int}"
 
 @using ToDoListModel
+@using Microsoft.Identity.Abstractions
 
-@inject ToDoListService ToDoListService
 @inject NavigationManager Navigation
 
 <h3>Edit Task</h3>
@@ -13,13 +13,19 @@
 @code {
     [Parameter] public int Id { get; set; }
     ToDo toDo = new ToDo();
+    private IDownstreamApi _downstreamApi;
     protected async override Task OnParametersSetAsync()
     {
-        toDo = await ToDoListService.GetAsync(Id);
+        toDo = await _downstreamApi.GetForUserAsync<ToDo>(
+                "TodoList",
+                options => options.RelativePath = $"api/todolist/{Id}");
     }
+
     protected async Task EditTask()
     {
-        await ToDoListService.EditAsync(toDo);
+        await _downstreamApi.CallApiForUserAsync<ToDo, ToDo>(
+                 "TodoList", toDo,
+                 options => { options.RelativePath = $"api/todolist/{Id}"; options.HttpMethod = HttpMethod.Patch; });
         Navigation.NavigateTo("todolist");
     }
 }
