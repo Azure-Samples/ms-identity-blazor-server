@@ -4,6 +4,7 @@
 @using Microsoft.Identity.Abstractions
 
 @inject NavigationManager Navigation
+@inject IDownstreamApi _downstreamApi
 
 <h3>Edit Task</h3>
 
@@ -13,7 +14,6 @@
 @code {
     [Parameter] public int Id { get; set; }
     ToDo toDo = new ToDo();
-    private IDownstreamApi _downstreamApi;
     protected async override Task OnParametersSetAsync()
     {
         toDo = await _downstreamApi.GetForUserAsync<ToDo>(

@@ -34,10 +34,10 @@ namespace blazorserver_client
             // EnableTokenAcquisitionToCallDownstreamApi adds support for the web app to acquire tokens to call the web API.
             services.AddMicrosoftIdentityWebAppAuthentication(Configuration)
                 .EnableTokenAcquisitionToCallDownstreamApi(
-                    Configuration.GetSection("TodoList:Scopes").Get<string[]>()
+                    Configuration.GetSection("TodoList").GetValue<string[]>("Scopes")
                 )
-                .AddInMemoryTokenCaches(); ;
-            
+                .AddInMemoryTokenCaches();
+
             services.AddHttpContextAccessor();
 
             // Enables to add client service to use the HttpClient by dependency injection.

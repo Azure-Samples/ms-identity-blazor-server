@@ -4,6 +4,7 @@
 @using Microsoft.Identity.Abstractions
 
 @inject NavigationManager Navigation
+@inject IDownstreamApi _downstreamApi
 
 <h3>Create Task</h3>
 
@@ -12,7 +13,6 @@
 
 @code {
     protected ToDo toDo = new ToDo();
-    private IDownstreamApi _downstreamApi;
 
     protected async Task AddTask()
     {

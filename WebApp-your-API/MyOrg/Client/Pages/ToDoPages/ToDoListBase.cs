@@ -10,18 +10,15 @@ using ToDoListModel;
 
 namespace blazorserver_client.Pages.ToDoPages
 {
-
+   
     public class ToDoListBase : ComponentBase
     {
-        private IDownstreamApi _downstreamApi;
-
-        public ToDoListBase(IDownstreamApi todoListBase)
-        {
-            _downstreamApi = todoListBase;
-        }
 
         [Inject]
         MicrosoftIdentityConsentAndConditionalAccessHandler ConsentHandler { get; set; }
+
+        [Inject]
+        IDownstreamApi _downstreamApi { get; set; }
 
         protected IEnumerable<ToDo> toDoList = new List<ToDo>();
         
@@ -59,8 +56,8 @@ namespace blazorserver_client.Pages.ToDoPages
         /// <returns></returns>
         protected async Task DeleteItem(int Id)
         {
-            await _downstreamApi.GetForUserAsync<ToDo>(
-                "ToDoList",
+            await _downstreamApi.DeleteForUserAsync<ToDo>(
+                "TodoList", toDo,
                 options => options.RelativePath = $"api/todolist/{Id}");
             await GetToDoListService();
         }
