@@ -55,11 +55,6 @@
   },
 
   /* It either can be a text or link to another readme file */
-  "ReadmeHowTheCodeWasCreated": {
-    "IncludeFilePath": "../ReadmeFiles/ReadmeHowTheCodeWasCreated.md"
-  },
-
-  /* It either can be a text or link to another readme file */
   "ReadmeAboutTheCode": {
     "IncludeFilePath": "../ReadmeFiles/ReadmeAboutTheCode.md" 
    },
