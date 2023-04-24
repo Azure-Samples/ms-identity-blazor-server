@@ -99,30 +99,59 @@ As a first step you'll need to:
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. If your account is present in more than one Azure AD tenant, select your profile at the top right corner in the menu on top of the page, and then **switch directory** to change your portal session to the desired Azure AD tenant.
 
-### Register the service app (ToDoListService-aspnetcore)
+#### Register the service app (TodoListService-aspnetcore)
 
-1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure AD** service.
+1. Navigate to the [Azure portal](https://portal.azure.com) and select the **Azure Active Directory** service.
 1. Select the **App Registrations** blade on the left, then select **New registration**.
 1. In the **Register an application page** that appears, enter your application's registration information:
-   - In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `ToDoListService-aspnetcore`.
-   - Under **Supported account types**, select **Accounts in this organizational directory only**.
-1. Select **Register** to create the application.
-1. In the app's registration screen, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
-1. Select **Save** to save your changes.
-1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can declare the parameters to expose this app as an Api for which client applications can obtain [access tokens](https://aka.ms/access-tokens) for.
-The first thing that we need to do is to declare the unique [resource](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow) URI that the clients will be using to obtain access tokens for this Api. To declare an resource URI, follow the following steps:
-   - Select `Set` next to the **Application ID URI** to generate a URI that is unique for this app.
-   - For this sample, accept the proposed Application ID URI (api://{clientId}) by selecting **Save**.
-1. All Apis have to publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code) for the client's to obtain an access token successfully. To publish a scope, follow the following steps:
-   - Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
-        - For **Scope name**, use `access_as_user`.
-        - Select **Admins and users** options for **Who can consent?**
-        - For **Admin consent display name** type `Access ToDoListService-aspnetcore`
-        - For **Admin consent description** type `Allows the app to access ToDoListService-aspnetcore as the signed-in user.`
-        - For **User consent display name** type `Access ToDoListService-aspnetcore`
-        - For **User consent description** type `Allow the application to access ToDoListService-aspnetcore on your behalf.`
-        - Keep **State** as **Enabled**
-        - Select the **Add scope** button on the bottom to save this scope.
+    1. In the **Name** section, enter a meaningful application name that will be displayed to users of the app, for example `TodoListService-aspnetcore-webapi`.
+    1. Under **Supported account types**, select **Accounts in this organizational directory only**
+    1. Select **Register** to create the application.
+1. In the **Overview** blade, find and note the **Application (client) ID**. You use this value in your app's configuration file(s) later in your code.
+1. In the app's registration screen, select the **Expose an API** blade to the left to open the page where you can publish the permission as an API for which client applications can obtain [access tokens](https://aka.ms/access-tokens) for. The first thing that we need to do is to declare the unique [resource](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow) URI that the clients will be using to obtain access tokens for this API. To declare an resource URI(Application ID URI), follow the following steps:
+    1. Select **Set** next to the **Application ID URI** to generate a URI that is unique for this app.
+    1. For this sample, accept the proposed Application ID URI (`api://{clientId}`) by selecting **Save**. Read more about Application ID URI at [Validation differences by supported account types \(signInAudience\)](https://docs.microsoft.com/azure/active-directory/develop/supported-accounts-validation).
+
+##### Publish Delegated Permissions
+
+1. All APIs must publish a minimum of one [scope](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow#request-an-authorization-code), also called [Delegated Permission](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#permission-types), for the client apps to obtain an access token for a *user* successfully. To publish a scope, follow these steps:
+1. Select **Add a scope** button open the **Add a scope** screen and Enter the values as indicated below:
+    1. For **Scope name**, use `ToDoList.Read`.
+    1. Select **Admins and users** options for **Who can consent?**.
+    1. For **Admin consent display name** type in *Read users ToDo list using the 'TodoListService-aspnetcore-webapi'*.
+    1. For **Admin consent description** type in *Allow the app to read the user's ToDo list using the 'TodoListService-aspnetcore-webapi'*.
+    1. For **User consent display name** type in *Read your ToDo list items via the 'TodoListService-aspnetcore-webapi'*.
+    1. For **User consent description** type in *Allow the app to read your ToDo list items via the 'TodoListService-aspnetcore-webapi'*.
+    1. Keep **State** as **Enabled**.
+    1. Select the **Add scope** button on the bottom to save this scope.
+    > Repeat the steps above for another scope named **ToDoList.ReadWrite**
+1. Select the **Manifest** blade on the left.
+    1. Set `accessTokenAcceptedVersion` property to **2**.
+    1. Select on **Save**.
+
+> :information_source:  Follow [the principle of least privilege when publishing permissions](https://learn.microsoft.com/security/zero-trust/develop/protected-api-example) for a web API.
+
+##### Publish Application Permissions
+
+1. All APIs should publish a minimum of one [App role for applications](https://docs.microsoft.com/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps#assign-app-roles-to-applications), also called [Application Permission](https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#permission-types), for the client apps to obtain an access token as *themselves*, i.e. when they are not signing-in a user. **Application permissions** are the type of permissions that APIs should publish when they want to enable client applications to successfully authenticate as themselves and not need to sign-in users. To publish an application permission, follow these steps:
+1. Still on the same app registration, select the **App roles** blade to the left.
+1. Select **Create app role**:
+    1. For **Display name**, enter a suitable name for your application permission, for instance **ToDoList.Read.All**.
+    1. For **Allowed member types**, choose **Application** to ensure other applications can be granted this permission.
+    1. For **Value**, enter **ToDoList.Read.All**.
+    1. For **Description**, enter *Allow the app to read every user's ToDo list using the 'TodoListService-aspnetcore-webapi'*.
+    1. Select **Apply** to save your changes.
+
+    > Repeat the steps above for another app permission named **ToDoList.ReadWrite.All**
+
+##### Configure Optional Claims
+
+1. Still on the same app registration, select the **Token configuration** blade to the left.
+1. Select **Add optional claim**:
+    1. Select **optional claim type**, then choose **Access**.
+     1. Select the optional claim **idtyp**.
+    > Indicates token type. This claim is the most accurate way for an API to determine if a token is an app token or an app+user token. This is not issued in tokens issued to users.
+    1. Select **Add** to save your changes.
 
 #### Configure the service app (ToDoListService-aspnetcore) to use your app registration
 
@@ -174,12 +203,12 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
 1. Open the `Client\appsettings.json` file.
-1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of the `WebApp-calls-API-blazor-server` application copied from the Azure portal.
-1. Find the key `TenantId` and replace the existing value with your Azure AD tenant ID.
-1. Find the key `Domain` and replace the existing value with your Azure AD tenant name.
-1. Find the key `ClientSecret` and replace the existing value with the key you saved during the creation of the `WebApp-calls-API-blazor-server` app, in the Azure portal.
-1. Find the key `TodoListScope` and replace the existing value with Scope.
-1. Find the key `TodoListBaseAddress` and replace the existing value with the base address of the ToDoListService-aspnetcore project (by default `https://localhost:44351`).
+1. Find the key `Domain` and replace the existing value with your Azure AD tenant domain, ex. `contoso.onmicrosoft.com`.
+1. Find the key `TenantId` and replace the existing value with your Azure AD tenant/directory ID.
+1. Find the key `ClientId` and replace the existing value with the application ID (clientId) of `TodoListClient-aspnetcore` app copied from the Azure portal.
+1. Find the key `ClientSecret` and replace the existing value with the generated secret that you saved during the creation of `TodoListClient-aspnetcore` copied from the Azure portal.
+1. Find the key `Scopes` and replace the existing value with **"api://<your_service_api_client_id>/ToDoList.Read api://<your_service_api_client_id>/ToDoList.ReadWrite"**.
+1. Find the key `BaseUrl` and replace the existing value with the base address of `TodoListService-aspnetcore` (by default `https://localhost:44351`).
 
 ## Running the sample
 
