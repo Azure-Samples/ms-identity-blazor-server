@@ -8,10 +8,13 @@ products:
   - azure-web-apps
 name: Enable your Blazor Server app to sign-in users and call APIs with the Microsoft identity platform
 urlFragment: ms-identity-blazor-server
-description: "This sample demonstrates how to enable your Blazor Server to sign-in users and call APIs with the Microsoft identity platform"
+description: "Deprecated Blazor Server sample. Use the current ms-identity-docs-code-dotnet web-app-blazor-server sample."
 ---
 
 # Tutorial: Enable your Blazor Server app to sign-in users and call APIs with the Microsoft identity platform
+
+> [!IMPORTANT]
+> **This sample is deprecated and is no longer maintained.** For the current replacement, use the [`web-app-blazor-server` sample in `ms-identity-docs-code-dotnet`](https://github.com/Azure-Samples/ms-identity-docs-code-dotnet/tree/main/web-app-blazor-server).
 
 [![.NET Core](https://github.com/Azure-Samples/ms-identity-blazor-server/actions/workflows/dotnet-core.yml/badge.svg)](https://github.com/Azure-Samples/ms-identity-blazor-server/actions/workflows/dotnet-core.yml)
 
